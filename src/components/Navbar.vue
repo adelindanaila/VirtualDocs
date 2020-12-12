@@ -44,14 +44,14 @@
                 <a 
                     href="javascript:void(0);" 
                     class="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"
-                    @click="signin_modal_open()"
+                    @click="modal_open('signin')"
                 >
                     Sign in
                 </a>
                 <a
                     href="javascript:void(0);"
                     class="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
-                    @click="signup_modal_open()"
+                    @click="modal_open('signup')"
                 >
                     Sign up
                 </a>
@@ -176,7 +176,7 @@
                 <a
                     href="javascript:void(0);"
                     class="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
-                    @click="signup_modal_open( )"
+                    @click="modal_open('signup')"
                 >
                     Sign up
                 </a>
@@ -185,7 +185,7 @@
                     <a 
                         href="javascript:void(0);"
                         class="text-indigo-600 hover:text-indigo-500"
-                        @click="signin_modal_open( )"
+                        @click="modal_open('signin')"
                     >
                         Sign in
                     </a>
@@ -201,8 +201,8 @@
 </template>
 
 <script>
-import SignInModal from '@/components/signin/SignInModal'
-import SignUpModal from '@/components/signup/SignUpModal'
+import SignInModal from '@/components/account/signin/SignInModal'
+import SignUpModal from '@/components/account/signup/SignUpModal'
 
 export default {
 
@@ -258,50 +258,45 @@ export default {
 
         },
 
-        signin_modal_open( ) {
-            
-            this.signin_modal = true
+        modal_open( component ) {
+
+            if( component === 'signin' )
+                this.signin_modal = true
+            else if( component === 'signup' )
+                this.signup_modal = true
+
             document.body.style.overflowY = 'hidden'
 
         },
 
-        signin_modal_close( ) {
+        modal_close( component ) {
 
-            const element = document.getElementById('signin_modal')
+            let element_id = null
+
+            if( component === 'signin' )
+                element_id = 'signin_modal'
+
+            else if( component === 'signup' )
+                element_id = 'signup_modal'
+
+            const element = document.getElementById(element_id)
             element.classList.remove('animate__fadeIn')
             element.classList.add('animate__fadeOut')
 
             setTimeout(( ) => {
                 
-                this.signin_modal = false
-                document.body.style.overflowY = ''
-                
-            }, 500)
+                if( component === 'signin' )
+                    this.signin_modal = false
 
-        },
+                else if( component === 'signup' )
+                    this.signup_modal = false
 
-        signup_modal_open( ) {
-            
-            this.signup_modal = true
-            document.body.style.overflowY = 'hidden'
-
-        },
-
-        signup_modal_close( ) {
-
-            const element = document.getElementById('signup_modal')
-            element.classList.remove('animate__fadeIn')
-            element.classList.add('animate__fadeOut')
-
-            setTimeout(( ) => {
-                
-                this.signup_modal = false
                 document.body.style.overflowY = ''
                 
             }, 500)
 
         }
-
+        
     }
 }
 </script>

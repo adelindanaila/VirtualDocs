@@ -11,7 +11,7 @@
                 <a
                     href="javascript:void(0);"
                     class="font-medium text-indigo-600 hover:text-indigo-500"
-                    @click="this.$parent.signin_modal( )"
+                    @click="this.$parent.change('signup_form', 'signin')"
                 >
                     connect to your account
                 </a>

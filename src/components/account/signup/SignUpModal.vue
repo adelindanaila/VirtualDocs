@@ -7,26 +7,29 @@
             stroke="currentColor"
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
-            @click="this.$parent.signup_modal_close( )"
+            @click="this.$parent.modal_close('signup')"
         >
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
         </svg>
 
         <SignUpForm v-if="component === 'signup'" />
         <SignInForm v-if="component === 'signin'" />
+        <ForgotPasswordForm v-if="component === 'forgotpassword'" />
 
     </div>
 </template>
 
 <script>
-import SignUpForm from '@/components/signup/SignUpForm'
-import SignInForm from '@/components/signin/SignInForm'
+import SignUpForm from '@/components/account/signup/SignUpForm'
+import SignInForm from '@/components/account/signin/SignInForm'
+import ForgotPasswordForm from '@/components/account/ForgotPasswordForm'
 
 export default {
 	name: 'SignUpModal',
 	components: {
         SignUpForm,
-        SignInForm
+        SignInForm,
+        ForgotPasswordForm
     },
     
     data: ( ) => ({
@@ -37,24 +40,13 @@ export default {
 
     methods: {
 
-        signup_modal( ) {
+        change( element_id, component ) {
 
-            const element = document.getElementById('signin_form')
+            const element = document.getElementById(element_id)
             element.classList.remove('animate__fadeIn')
             element.classList.add('animate__fadeOut')
 
-            setTimeout(( ) => this.component = 'signup', 500)
-            
-
-        },
-
-        signin_modal( ) {
-
-            const element = document.getElementById('signup_form')
-            element.classList.remove('animate__fadeIn')
-            element.classList.add('animate__fadeOut')
-            
-            setTimeout(( ) => this.component = 'signin', 500)
+            setTimeout(( ) => this.component = component, 500)
 
         }
 

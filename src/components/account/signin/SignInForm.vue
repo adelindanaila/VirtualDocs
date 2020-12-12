@@ -11,7 +11,7 @@
                 <a
                     href="javascript:void(0);"
                     class="font-medium text-indigo-600 hover:text-indigo-500"
-                    @click="this.$parent.signup_modal()"
+                    @click="this.$parent.change('signin_form', 'signup')"
                 >
                     register your account for free
                 </a>
@@ -39,7 +39,11 @@
                 </div>
 
                 <div class="text-sm">
-                <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">
+                <a
+                    href="javascript:void(0);"
+                    class="font-medium text-indigo-600 hover:text-indigo-500"
+                    @click="this.$parent.change('signin_form', 'forgotpassword')"
+                >
                     Forgot your password?
                 </a>
                 </div>
