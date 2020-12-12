@@ -1,6 +1,6 @@
 <template>
     <div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-md w-full space-y-8">
+        <div id="signup_form" class="max-w-md w-full space-y-8 animate__animated animate__faster animate__fadeIn">
             <div>
             <img class="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg" alt="Workflow">
             <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
@@ -8,8 +8,12 @@
             </h2>
             <p class="mt-2 text-center text-sm text-gray-600">
                 or
-                <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">
-                connect to your account
+                <a
+                    href="javascript:void(0);"
+                    class="font-medium text-indigo-600 hover:text-indigo-500"
+                    @click="this.$parent.signin_modal( )"
+                >
+                    connect to your account
                 </a>
             </p>
             </div>

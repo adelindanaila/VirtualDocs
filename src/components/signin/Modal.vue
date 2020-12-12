@@ -12,18 +12,54 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
         </svg>
 
-        <Form />
+        <SignInForm v-if="component === 'signin'" />
+        <SignUpForm v-if="component === 'signup'" />
 
     </div>
 </template>
 
 <script>
-import Form from '@/components/signin/Form'
+import SignInForm from '@/components/signin/Form'
+import SignUpForm from '@/components/signup/Form'
 
 export default {
+
 	name: 'SignInModal',
 	components: {
-		Form
-	}
+        SignInForm,
+        SignUpForm
+    },
+
+    data: ( ) => ({
+
+        component: 'signin'
+
+    }),
+
+    methods: {
+
+        signup_modal( ) {
+
+            const element = document.getElementById('signin_form')
+            element.classList.remove('animate__fadeIn')
+            element.classList.add('animate__fadeOut')
+
+            setTimeout(( ) => this.component = 'signup', 500)
+            
+
+        },
+
+        signin_modal( ) {
+
+            const element = document.getElementById('signup_form')
+            element.classList.remove('animate__fadeIn')
+            element.classList.add('animate__fadeOut')
+            
+            setTimeout(( ) => this.component = 'signin', 500)
+
+        }
+
+    }
+    
 }
 </script>
