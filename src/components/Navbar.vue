@@ -255,7 +255,12 @@ export default {
             element.classList.remove('animate__fadeIn')
             element.classList.add('animate__fadeOut')
 
-            setTimeout(( ) => this.signin_modal = false, 500)
+            setTimeout(( ) => {
+                
+                this.signin_modal = false
+                document.body.style.overflowY = ''
+                
+            }, 500)
 
         }
 
