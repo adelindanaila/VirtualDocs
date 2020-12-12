@@ -41,8 +41,12 @@
 
             </nav>
             <div class="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
-                <a href="#" class="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">
-                Sign in
+                <a 
+                    href="javascript:void(0);" 
+                    class="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"
+                    @click="signin_modal_open()"
+                >
+                    Sign in
                 </a>
                 <a href="#" class="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700">
                 Sign up
@@ -179,13 +183,24 @@
             </div>
         </div>
     </div>
+
+    <SignIn v-if="signin_modal" />
 </template>
 
 <script>
+import SignIn from '@/components/SignIn'
+
 export default {
+
+    name: 'Navbar',
+	components: {
+		SignIn
+	},
+
     data: ( ) => ({
 
-        mobile_navigation: false
+        mobile_navigation: false,
+        signin_modal: false
 
     }),
 
@@ -224,6 +239,23 @@ export default {
                 this.mobile_navigation = false
 
             }, 100)
+
+        },
+
+        signin_modal_open( ) {
+            
+            this.signin_modal = true
+            document.body.style.overflowY = 'hidden'
+
+        },
+
+        signin_modal_close( ) {
+
+            const element = document.getElementById('signin_modal')
+            element.classList.remove('animate__fadeIn')
+            element.classList.add('animate__fadeOut')
+
+            setTimeout(( ) => this.signin_modal = false, 500)
 
         }
 
