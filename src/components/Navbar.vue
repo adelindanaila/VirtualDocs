@@ -48,8 +48,12 @@
                 >
                     Sign in
                 </a>
-                <a href="#" class="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700">
-                Sign up
+                <a
+                    href="javascript:void(0);"
+                    class="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
+                    @click="signup_modal_open()"
+                >
+                    Sign up
                 </a>
             </div>
             </div>
@@ -169,13 +173,21 @@
                 </a>
                 </div>
                 <div>
-                <a href="#" class="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700">
+                <a
+                    href="javascript:void(0);"
+                    class="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
+                    @click="signup_modal_open( )"
+                >
                     Sign up
                 </a>
                 <p class="mt-6 text-center text-base font-medium text-gray-500">
                     Existing customer?
-                    <a href="#" class="text-indigo-600 hover:text-indigo-500">
-                    Sign in
+                    <a 
+                        href="javascript:void(0);"
+                        class="text-indigo-600 hover:text-indigo-500"
+                        @click="signin_modal_open( )"
+                    >
+                        Sign in
                     </a>
                 </p>
                 </div>
@@ -184,23 +196,27 @@
         </div>
     </div>
 
-    <SignIn v-if="signin_modal" />
+    <SignInModal v-if="signin_modal" />
+    <SignUpModal v-if="signup_modal" />
 </template>
 
 <script>
-import SignIn from '@/components/SignIn'
+import SignInModal from '@/components/signin/Modal'
+import SignUpModal from '@/components/signup/Modal'
 
 export default {
 
     name: 'Navbar',
 	components: {
-		SignIn
+        SignInModal,
+        SignUpModal
 	},
 
     data: ( ) => ({
 
         mobile_navigation: false,
-        signin_modal: false
+        signin_modal: false,
+        signup_modal: false
 
     }),
 
@@ -258,6 +274,28 @@ export default {
             setTimeout(( ) => {
                 
                 this.signin_modal = false
+                document.body.style.overflowY = ''
+                
+            }, 500)
+
+        },
+
+        signup_modal_open( ) {
+            
+            this.signup_modal = true
+            document.body.style.overflowY = 'hidden'
+
+        },
+
+        signup_modal_close( ) {
+
+            const element = document.getElementById('signup_modal')
+            element.classList.remove('animate__fadeIn')
+            element.classList.add('animate__fadeOut')
+
+            setTimeout(( ) => {
+                
+                this.signup_modal = false
                 document.body.style.overflowY = ''
                 
             }, 500)
