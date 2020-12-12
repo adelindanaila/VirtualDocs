@@ -2,25 +2,18 @@
     <main class="bg-gray-50 border-t-2 border-gray-100">
         <div class="py-10 mx-auto max-w-7xl px-4 sm:py-8 sm:px-6 md:py-10 lg:py-12 lg:px-8 xl:py-16">
             <div class="sm:text-center">
-            <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
-                <span class="block">Data to enrich your</span>
-                <span class="block text-indigo-600">online business</span>
-            </h1>
-            <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl">
-                Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.
-            </p>
-            <div class="mt-5 sm:mt-8 sm:flex sm:justify-center">
-                <div class="rounded-md shadow">
-                <a href="#" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10">
-                    Get started
-                </a>
+                <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
+                    <span class="block">Looking for a</span>
+                    <span class="block text-indigo-600">specific document?</span>
+                </h1>
+                <div class="relative text-gray-600 mx-auto mt-10 w-3/4">
+                    <input type="search" name="serch" placeholder="Search" class="text-base bg-white shadow w-full h-10 px-5 pr-10 rounded-full text-sm focus:outline-none">
+                    <span class="absolute right-0 top-0 mt-3 mr-4">
+                        <svg class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve" width="512px" height="512px">
+                        <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z"/>
+                        </svg>
+                    </span>
                 </div>
-                <div class="mt-3 sm:mt-0 sm:ml-3">
-                <a href="#" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 md:py-4 md:text-lg md:px-10">
-                    Live demo
-                </a>
-                </div>
-            </div>
             </div>
         </div>
     </main>
