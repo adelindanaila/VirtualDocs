@@ -1,18 +1,18 @@
 <template>
-  <Header />
-  <router-view/>
-  <Footer />
+	<Navbar />
+	<router-view/>
+	<Footer />
 </template>
 
 <script>
-import Header from '@/components/header/Index.vue'
-import Footer from '@/components/Footer.vue'
+import Navbar from '@/components/Navbar'
+import Footer from '@/components/Footer'
 
 export default {
-  name: 'Home',
-  components: {
-    Header,
-    Footer
-  }
+	name: 'App',
+	components: {
+		Navbar,
+		Footer
+	}
 }
 </script>
