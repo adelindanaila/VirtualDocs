@@ -9,7 +9,7 @@
                 <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-md sm:mx-auto md:mt-5 md:text-xl">
                     Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                 </p>
-                <div class="relative text-gray-600 mx-auto mt-10 w-3/4">
+                <div class="relative text-gray-600 mx-auto mt-8 w-3/4">
                     <input type="search" name="serch" placeholder="Search" class="text-base bg-white shadow w-full h-10 px-5 pr-10 rounded-full text-sm focus:outline-none">
                     <span class="absolute right-0 top-0 mt-3 mr-4">
                         <svg class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve" width="512px" height="512px">
