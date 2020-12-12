@@ -6,7 +6,7 @@
                     <span class="block">Looking for a</span>
                     <span class="block text-indigo-600">specific document?</span>
                 </h1>
-                <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-md sm:mx-auto md:mt-5 md:text-xl">
+                <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-md sm:mx-auto md:mt-5 md:text-xl mb-8">
                     Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                 </p>
                 <Search />

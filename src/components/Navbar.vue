@@ -23,20 +23,17 @@
             </div>
             <nav class="hidden md:flex space-x-10">
 
+                <router-link to="/" class="text-base font-medium text-gray-500 hover:text-gray-900">
+                    Home
+                </router-link>
+                <router-link to="/documents" class="text-base font-medium text-gray-500 hover:text-gray-900">
+                    Documents
+                </router-link>
                 <a href="#" class="text-base font-medium text-gray-500 hover:text-gray-900">
-                Text 1
+                    About us
                 </a>
                 <a href="#" class="text-base font-medium text-gray-500 hover:text-gray-900">
-                Text 2
-                </a>
-                <a href="#" class="text-base font-medium text-gray-500 hover:text-gray-900">
-                Text 3
-                </a>
-                <a href="#" class="text-base font-medium text-gray-500 hover:text-gray-900">
-                Text 4
-                </a>
-                <a href="#" class="text-base font-medium text-gray-500 hover:text-gray-900">
-                Text 5
+                    Contact
                 </a>
 
             </nav>
@@ -62,7 +59,7 @@
         <div 
             v-show="mobile_navigation"
             id="mobile_navigation"
-            class="absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden"
+            class="absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden z-50"
         >
             <div class="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white divide-y-2 divide-gray-50">
             <div class="pt-5 pb-6 px-5">
