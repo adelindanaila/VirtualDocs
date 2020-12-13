@@ -1,6 +1,6 @@
 <template>
     <footer class="footer bg-white border-t-2 border-gray-100 relative">
-        <div class="container max-w-7xl mx-auto px-6">
+        <div class="container max-w-7xl mx-auto">
 
             <div class="sm:flex sm:mt-8">
                 <div class="mt-8 sm:mt-0 sm:w-full sm:px-8 flex flex-col md:flex-row justify-between">
