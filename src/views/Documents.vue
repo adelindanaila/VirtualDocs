@@ -62,7 +62,7 @@
 										<th scope="col" class="px-6 h-16 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">
 											Document
 										</th>
-										<th scope="col" class="px-6 h-16 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">
+										<th scope="col" class="px-6 h-16 text-left text-sm font-medium text-gray-500 uppercase tracking-wider text-center">
 											Date
 										</th>
 									</tr>
@@ -86,7 +86,7 @@
 												</div>
 											</div>
 										</td>
-										<td class="px-6 py-4 whitespace-nowrap">
+										<td class="px-6 py-4 whitespace-nowrap text-center">
 											<div class="text-sm text-gray-500">12 days ago</div>
 										</td>
 									</tr>
@@ -108,7 +108,7 @@
 												</div>
 											</div>
 										</td>
-										<td class="px-6 py-4 whitespace-nowrap">
+										<td class="px-6 py-4 whitespace-nowrap text-center">
 											<div class="text-sm text-gray-500">12 days ago</div>
 										</td>
 									</tr>
@@ -130,7 +130,7 @@
 												</div>
 											</div>
 										</td>
-										<td class="px-6 py-4 whitespace-nowrap">
+										<td class="px-6 py-4 whitespace-nowrap text-center">
 											<div class="text-sm text-gray-500">12 days ago</div>
 										</td>
 									</tr>
