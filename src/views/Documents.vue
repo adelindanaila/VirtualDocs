@@ -54,8 +54,8 @@
 					</div>
 				</div>
 				<div class="w-3/4 overflow-hidden pl-3">
-					<div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-						<div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+					<div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+						<div class="align-middle inline-block min-w-full sm:px-6 lg:px-8">
 							<div class="border border-gray-100 overflow-hidden sm:rounded-lg">
 								<table class="min-w-full divide-y divide-gray-200">
 									<thead class="bg-gray-50">
