@@ -119,6 +119,7 @@ export default {
                 })
 
                 this.loading = false
+                this.$store.dispatch('user', response.data.user)
                 localStorage.setItem('token', response.data.token)
 
             }

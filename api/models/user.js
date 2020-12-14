@@ -50,4 +50,14 @@ schema.statics.login = async function(email, password) {
 
 }
 
+// static method for data
+schema.statics.data = async function(id) {
+
+    const user = await this.findById(id)
+    if( user ) return user
+
+    throw Error('data_notfounded')
+
+}
+
 module.exports = mongoose.model('user', schema)

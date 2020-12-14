@@ -7,5 +7,6 @@ import './axios'
 import './assets/css/tailwind.css'
 import './assets/scss/custom.scss'
 import 'animate.css'
+import store from './store'
 
-createApp(App).use(router).mount('#app')
+createApp(App).use(store).use(router).mount('#app')
