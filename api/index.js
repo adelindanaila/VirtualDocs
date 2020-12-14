@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 const user = require('./routes/user')
 
-require('dotenv').config()
+require('dotenv').config({ path: '../.env' })
 
 const app = express( )
 const port = process.env.API_PORT || 4000

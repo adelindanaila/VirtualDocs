@@ -1,5 +1,9 @@
 const model = require('../models/user')
+const jwt = require('jsonwebtoken')
 
+require('dotenv').config({ path: '../../.env' })
+
+// error handlder
 const get_errors = ( error ) => {
 
     let errors = { email: null, password: null }
@@ -39,6 +43,17 @@ const get_errors = ( error ) => {
 
 }
 
+// json web token
+const createToken = ( id ) => {
+
+    return jwt.sign({ id }, process.env.JWT_SECRET, {
+
+        expiresIn: Number(process.env.JWT_EXPIRE) * 24 * 60 * 60
+    
+    })
+
+}
+
 module.exports.signup = async (request, response) => {
 
     const { email, password } = request.body
@@ -46,7 +61,9 @@ module.exports.signup = async (request, response) => {
     try {
 
         const user = await model.create({ email, password })
-        response.status(201).json({ user })
+        const token = createToken( user._id )
+
+        response.status(201).json({ token })
 
     }
 
@@ -65,7 +82,9 @@ module.exports.signin = async ( request, response ) => {
     try {
 
         const user = await model.login(email, password)
-        response.status(200).json({ user })
+        const token = createToken( user._id )
+
+        response.status(200).json({ token })
 
     }
 

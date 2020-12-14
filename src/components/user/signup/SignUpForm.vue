@@ -17,7 +17,7 @@
                 </a>
             </p>
             </div>
-            <form id="signup_form" class="mt-8 space-y-6" @submit="submit">
+            <form id="signup_form" class="mt-8" @submit="submit">
                 <div class="rounded-md shadow-sm -space-y-px">
                     <div>
                         <label for="email-address" class="sr-only">Email address</label>
@@ -48,7 +48,7 @@
                     </div>
                 </div>
 
-                <div class="text-xs text-gray-500" style="margin-top: 0.5rem;">Minimum password length is 6 characters.</div>
+                <div class="text-xs text-gray-500 my-4">Minimum password length is 6 characters.</div>
 
                 <div>
                     <button
