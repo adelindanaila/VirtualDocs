@@ -49,6 +49,12 @@ export default {
 
             setTimeout(( ) => this.component = component, 500)
 
+        },
+
+        close_modal( ) {
+
+            this.$parent.modal_close('signin')
+
         }
 
     }

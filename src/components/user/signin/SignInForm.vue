@@ -120,6 +120,8 @@ export default {
 
                 this.loading = false
                 this.$store.dispatch('user', response.data.user)
+                this.$parent.close_modal( )
+                
                 localStorage.setItem('token', response.data.token)
 
             }
