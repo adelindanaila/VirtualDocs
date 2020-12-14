@@ -201,8 +201,8 @@
 </template>
 
 <script>
-import SignInModal from '@/components/account/signin/SignInModal'
-import SignUpModal from '@/components/account/signup/SignUpModal'
+import SignInModal from '@/components/user/signin/SignInModal'
+import SignUpModal from '@/components/user/signup/SignUpModal'
 
 export default {
 
