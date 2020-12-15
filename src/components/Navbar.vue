@@ -74,7 +74,8 @@
                                 class="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 ring-indigo-400"
                                 id="user-menu"
                                 aria-haspopup="true"
-                                @click="umd_toggle()"
+                                v-on:focus="umd_toggle(false)"
+                                v-on:blur="umd_toggle(true)"
                             >
                                 <span class="sr-only">Open user menu</span>
                                 <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
@@ -301,9 +302,9 @@ export default {
 
         },
 
-        umd_toggle( ) {
+        umd_toggle( state ) {
 
-            if( this.user_menu_dropdown ) {
+            if( state ) {
 
                 const element = document.getElementById('user_menu_dropdown')
 
