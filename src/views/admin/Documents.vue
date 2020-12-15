@@ -20,10 +20,13 @@
 										<th scope="col" class="px-6 h-16 text-left text-sm font-medium text-gray-500 uppercase tracking-wider text-center">
 											Date
 										</th>
+										<th scope="col" class="relative px-6 h-16">
+											<span class="sr-only">Edit</span>
+										</th>
 									</tr>
 								</thead>
 								<tbody class="bg-white divide-y divide-gray-200">
-									<tr class="cursor-pointer hover:text-indigo-400 hover:bg-indigo-100">
+									<tr>
 										<td class="px-6 py-4 whitespace-nowrap">
 											<div class="flex items-center">
 												<div class="flex-shrink-0 h-10 w-10 bg-indigo-50 rounded-full flex items-center justify-center">
@@ -43,9 +46,12 @@
 										</td>
 										<td class="px-6 py-4 whitespace-nowrap text-center">
 											<div class="text-sm text-gray-500">12 days ago</div>
+										</td>
+										<td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+											<a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
 										</td>
 									</tr>
-									<tr class="cursor-pointer hover:text-indigo-400 hover:bg-indigo-100">
+									<tr>
 										<td class="px-6 py-4 whitespace-nowrap">
 											<div class="flex items-center">
 												<div class="flex-shrink-0 h-10 w-10 bg-indigo-50 rounded-full flex items-center justify-center">
@@ -65,9 +71,12 @@
 										</td>
 										<td class="px-6 py-4 whitespace-nowrap text-center">
 											<div class="text-sm text-gray-500">12 days ago</div>
+										</td>
+										<td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+											<a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
 										</td>
 									</tr>
-									<tr class="cursor-pointer hover:text-indigo-400 hover:bg-indigo-100">
+									<tr>
 										<td class="px-6 py-4 whitespace-nowrap">
 											<div class="flex items-center">
 												<div class="flex-shrink-0 h-10 w-10 bg-indigo-50 rounded-full flex items-center justify-center">
@@ -87,6 +96,9 @@
 										</td>
 										<td class="px-6 py-4 whitespace-nowrap text-center">
 											<div class="text-sm text-gray-500">12 days ago</div>
+										</td>
+										<td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+											<a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
 										</td>
 									</tr>
 								</tbody>
