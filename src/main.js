@@ -45,7 +45,8 @@ router.beforeEach( async ( to, from, next ) => {
 	else if( store.state.token ) {
 
 		// admin check
-		let admin = jwt.decode(store.state.token).admin
+		let admin = jwt.decode(store.state.token).admin ? true : false
+		store.dispatch('admin', admin)
 
 		if( to.meta.admin && !admin ) {
 			
