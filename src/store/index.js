@@ -1,5 +1,4 @@
 import { createStore } from 'vuex'
-import axios from 'axios'
 
 export default createStore({
 
@@ -21,26 +20,9 @@ export default createStore({
 
 	mutations: {
 
-		async user( state, user ) {
+		user( state, user ) {
 
-			try {
-
-				const params = new URLSearchParams({
-
-					id: user
-
-				}).toString()
-
-				const response = await axios.get(`/user?${params}`)
-				state.user = response.data
-
-			}
-
-			catch ( error ) {
-
-				console.error(error)
-
-			}
+			state.user = user
 
 		}
 

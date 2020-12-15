@@ -4,40 +4,52 @@ import Documents from '../views/Documents'
 import AdminHome from '../views/admin/Home'
 import AdminDocuments from '../views/admin/Documents'
 import AdminUsers from '../views/admin/Users'
+import user from '../middleware/user'
 
 const routes = [
+
 	{
 		path: '/',
 		name: 'Home',
 		component: Home
 	},
+
 	{
 		path: '/documents',
 		name: 'Documents',
-		component: Documents
+		component: Documents,
+		meta: {
+			middleware: [user]
+		}
 	},
+
 	{
 		path: '/admin',
 		name: 'AdminHome',
 		component: AdminHome
 	},
+
 	{
 		path: '/admin/documents',
 		name: 'AdminDocuments',
 		component: AdminDocuments
 	},
+
 	{
 		path: '/admin/users',
 		name: 'AdminUsers',
 		component: AdminUsers
 	}
+
 ]
 
 const router = createRouter({
+
 	history: createWebHashHistory(),
 	routes,
 	linkActiveClass: 'font-bold text-gray-900',
 	linkExactActiveClass: 'font-bold text-gray-900'
+
 })
 
 export default router

@@ -63,7 +63,7 @@ module.exports.signup = async (request, response) => {
         const user = await model.create({ email, password })
         const token = createToken( user._id )
 
-        response.status(200).json({ user: user._id, token })
+        response.status(200).json({ user, token })
 
     }
 
@@ -84,7 +84,7 @@ module.exports.signin = async ( request, response ) => {
         const user = await model.login( email, password )
         const token = createToken( user._id )
 
-        response.status(200).json({ user: user._id, token })
+        response.status(200).json({ user, token })
 
     }
 
@@ -98,12 +98,22 @@ module.exports.signin = async ( request, response ) => {
 
 module.exports.data = async ( request, response ) => {
 
-    const { id } = request.query
+    const { token } = request.query
 
     try {
 
-        const data = await model.data( id )
-        response.status(200).json( data )
+        jwt.verify( token, process.env.JWT_SECRET, async ( error, decoded ) => {
+
+            if( error ) response.status(400).json( error )
+
+            else {
+
+                const data = await model.data( decoded.id )
+                response.status(200).json( data )
+
+            }
+            
+        })
 
     }
 
