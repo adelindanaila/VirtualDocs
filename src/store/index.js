@@ -5,6 +5,7 @@ export default createStore({
 	state: {
 
 		loading: true,
+		token: localStorage.getItem('token'),
 		user: null
 
 	},
@@ -14,6 +15,12 @@ export default createStore({
 		loading: ( state ) => {
 
 			return state.loading
+
+		},
+
+		token: ( state ) => {
+
+			return state.token
 
 		},
 
@@ -33,6 +40,12 @@ export default createStore({
 
 		},
 
+		token( state, token ) {
+
+			state.token = token
+
+		},
+
 		user( state, user ) {
 
 			state.user = user
@@ -46,6 +59,12 @@ export default createStore({
 		loading( context, loading ) {
 
 			context.commit('loading', loading)
+
+		},
+
+		token( context, token ) {
+
+			context.commit('token', token)
 
 		},
 

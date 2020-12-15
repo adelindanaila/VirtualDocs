@@ -6,21 +6,35 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
-import './axios'
-
 import './assets/css/tailwind.css'
 import './assets/scss/custom.scss'
 import 'animate.css'
 
-// jwt check
+// axios settings
+axios.defaults.baseURL = config.api_url
+axios.interceptors.request.use(
 
+    config => {
+        
+        config.headers.authorization = `Bearer ${store.state.token}`
+        return config
+
+    },
+
+    error => {
+
+        return Promise.reject(error)
+
+    }
+
+)
+
+// jwt check
 router.beforeEach( async ( to, from, next ) => {
 
-	const token = localStorage.getItem('token')
-
-	if( !token && to.meta.authenticated ) router.push(config.not_logged_page)
+	if( !store.state.token && to.meta.authenticated ) router.push(config.not_logged_page)
 	
-	else if( token ) {
+	else if( store.state.token ) {
 
 		try {
 
@@ -31,7 +45,7 @@ router.beforeEach( async ( to, from, next ) => {
 		
 		}
 		
-		catch ( error ) {
+		catch {
 		
 			if( to.meta.authenticated ) router.push(config.not_logged_page)
 	
@@ -40,6 +54,9 @@ router.beforeEach( async ( to, from, next ) => {
 		}
 
 	}
+
+	else
+		store.dispatch('loading', false)
 
 	return next( )
 

@@ -386,6 +386,7 @@ export default {
 
         logout( ) {
 
+            this.$store.dispatch('token', null)
             this.$store.dispatch('user', null)
             this.$router.push('/')
             localStorage.removeItem('token')
