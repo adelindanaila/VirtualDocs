@@ -247,8 +247,8 @@
 </template>
 
 <script>
-import SignInModal from '@/components/user/signin/SignInModal'
-import SignUpModal from '@/components/user/signup/SignUpModal'
+import SignInModal from '@/components/user/signin/Modal'
+import SignUpModal from '@/components/user/signup/Modal'
 
 export default {
 
@@ -383,6 +383,7 @@ export default {
         logout( ) {
 
             this.$store.dispatch('user', null)
+            this.$router.push('/')
             localStorage.removeItem('token')
 
         }

@@ -20,9 +20,9 @@
 </template>
 
 <script>
-import SignInForm from '@/components/user/signin/SignInForm'
-import SignUpForm from '@/components/user/signup/SignUpForm'
-import ForgotPasswordForm from '@/components/user/ForgotPasswordForm'
+import SignInForm from '@/components/user/signin/Form'
+import SignUpForm from '@/components/user/signup/Form'
+import ForgotPasswordForm from '@/components/user/ForgotPassword'
 
 export default {
 

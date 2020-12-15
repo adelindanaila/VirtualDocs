@@ -105,6 +105,7 @@ export default {
                 })
  
                 this.$store.dispatch('user', response.data.user)
+                this.$router.push('/')
                 this.$parent.close_modal( )
                 this.loading = false
                 
