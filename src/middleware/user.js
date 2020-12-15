@@ -9,13 +9,8 @@ const user = async ( { next, store, router, authenticated } ) => {
 
     try {
 
-        const params = new URLSearchParams({
-    
-            token
-    
-        }).toString()
-    
-        const response = await axios.get(`/user?${params}`)
+        const response = await axios.get('/user')
+        
         store.dispatch('user', response.data)
         store.dispatch('loading', false)
     

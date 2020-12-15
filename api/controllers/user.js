@@ -98,22 +98,10 @@ module.exports.signin = async ( request, response ) => {
 
 module.exports.data = async ( request, response ) => {
 
-    const { token } = request.query
-
     try {
 
-        jwt.verify( token, process.env.JWT_SECRET, async ( error, decoded ) => {
-
-            if( error ) response.status(400).json( error )
-
-            else {
-
-                const data = await model.data( decoded.id )
-                response.status(200).json( data )
-
-            }
-            
-        })
+        const data = await model.data( request.user )
+        response.status(200).json( data )
 
     }
 
