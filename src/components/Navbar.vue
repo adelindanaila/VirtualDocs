@@ -35,7 +35,11 @@
                     <a href="#" class="text-base font-medium text-gray-500 hover:text-gray-900">
                         Contact
                     </a>
-                    <router-link to="/admin" class="text-base font-medium text-gray-500 hover:text-gray-900">
+                    <router-link
+                        to="/admin" 
+                        class="text-base font-medium text-gray-500 hover:text-gray-900"
+                        :class="this.$router.currentRoute.value.fullPath.includes('/admin') ? 'font-bold text-gray-900' : null"
+                    >
                         Admin
                     </router-link>
 
