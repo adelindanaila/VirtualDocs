@@ -25,21 +25,21 @@ const schema = new mongoose.Schema({
 })
 
 // encrypt password before is sent to db
-schema.pre('save', async function(next) {
+schema.pre('save', async function( next ) {
 
     const salt = await bcrypt.genSalt( )
-    this.password = await bcrypt.hash(this.password, salt)
+    this.password = await bcrypt.hash( this.password, salt )
     next( )
 
 })
 
 // static method for login
-schema.statics.login = async function(email, password) {
+schema.statics.login = async function( email, password ) {
 
     const user = await this.findOne({ email })
     if( user ) {
 
-        const auth = await bcrypt.compare(password, user.password)
+        const auth = await bcrypt.compare( password, user.password )
         if( auth ) return user
 
         throw Error('password_incorrect')
@@ -50,14 +50,25 @@ schema.statics.login = async function(email, password) {
 
 }
 
-// static method for data
-schema.statics.data = async function(id) {
+// static method for user
+schema.statics.user = async function( id ) {
 
-    const user = await this.findById(id)
-    if( user ) return user
+    const data = await this.findById( id )
+    if( data ) return data
 
-    throw Error('data_notfounded')
+    throw Error('user_notfounded')
 
 }
+
+// static method for users
+schema.statics.users = async function( id, limit ) {
+
+    const data = await this.find( ).select('email').limit(limit)
+    if( data ) return data
+
+    throw Error('users_notfounded')
+
+}
+
 
 module.exports = mongoose.model('user', schema)

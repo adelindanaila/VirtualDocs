@@ -20,3 +20,14 @@ body::-webkit-scrollbar-thumb {
     border-radius: 5px;
 
 }
+
+tr.animate__animated {
+
+    @for $i from 1 through 30 {
+        &:nth-of-type(#{$i}) {
+            -webkit-animation-delay: $i * 75ms;
+            animation-delay: $i * 75ms;
+        }
+    }
+
+}

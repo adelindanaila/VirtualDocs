@@ -96,11 +96,30 @@ module.exports.signin = async ( request, response ) => {
 
 }
 
-module.exports.data = async ( request, response ) => {
+module.exports.user = async ( request, response ) => {
 
     try {
 
-        const data = await model.data( request.user )
+        const data = await model.user( request.user )
+        response.status(200).json( data )
+
+    }
+
+    catch (error) {
+        
+        response.status(400).json( error )
+
+    }
+
+}
+
+module.exports.users = async ( request, response ) => {
+
+    const { limit } = request.query
+
+    try {
+
+        const data = await model.users( request.user, Number(limit) )
         response.status(200).json( data )
 
     }

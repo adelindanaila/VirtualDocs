@@ -7,6 +7,7 @@ const router = Router( )
 router.post('/user/signup', controller.signup)
 router.post('/user/signin', controller.signin)
 
-router.get('/user', authorization, controller.data)
+router.get('/user', authorization, controller.user)
+router.get('/users', authorization, controller.users)
 
 module.exports = router
