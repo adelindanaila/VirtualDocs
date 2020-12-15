@@ -1,4 +1,5 @@
 import { createApp } from 'vue'
+import config from './config.json'
 import App from './App.vue'
 import router from './router'
 
@@ -46,4 +47,10 @@ router.beforeEach( ( to, from, next ) => {
 
 })
 
-createApp(App).use(store).use(router).mount('#app')
+const app = createApp(App)
+
+app.config.devtools = config.mode === 'development'
+
+app.use(store)
+app.use(router)
+app.mount('#app')
