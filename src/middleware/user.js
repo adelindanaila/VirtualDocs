@@ -1,11 +1,11 @@
 import axios from 'axios'
 import config from '../config.json'
 
-const user = async ( { next, store, router } ) => {
+const user = async ( { next, store, router, authenticated } ) => {
 
     const token = localStorage.getItem('token')
 
-    if( !token ) router.push(config.not_logged_page)
+    if( !token && authenticated ) router.push(config.not_logged_page)
 
     try {
 
@@ -17,13 +17,15 @@ const user = async ( { next, store, router } ) => {
     
         const response = await axios.get(`/user?${params}`)
         store.dispatch('user', response.data)
+        store.dispatch('loading', false)
     
     }
     
     catch ( error ) {
     
-        console.error(error)
-        router.push(config.not_logged_page)
+        if( authenticated ) router.push(config.not_logged_page)
+
+        store.dispatch('loading', false)
     
     }
     

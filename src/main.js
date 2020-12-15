@@ -36,8 +36,9 @@ router.beforeEach( ( to, from, next ) => {
 		const middleware = Array.isArray( to.meta.middleware ) ? to.meta.middleware : [to.meta.middleware]
 		const context = { from, next, router, to }
 		const nextMiddleware = nextFactory( context, middleware, 1 )
+		const authenticated = to.meta.authenticated
 
-		return middleware[0]( { ...context, next: nextMiddleware, store, router } )
+		return middleware[0]( { ...context, next: nextMiddleware, store, router, authenticated } )
 
 	}
 

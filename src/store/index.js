@@ -4,11 +4,18 @@ export default createStore({
 
 	state: {
 
+		loading: true,
 		user: null
 
 	},
 
 	getters: {
+
+		loading: ( state ) => {
+
+			return state.loading
+
+		},
 
 		user: ( state ) => {
 
@@ -20,6 +27,12 @@ export default createStore({
 
 	mutations: {
 
+		loading( state, loading ) {
+
+			state.loading = loading
+
+		},
+
 		user( state, user ) {
 
 			state.user = user
@@ -29,6 +42,12 @@ export default createStore({
 	},
 
 	actions: {
+
+		loading( context, loading ) {
+
+			context.commit('loading', loading)
+
+		},
 
 		user( context, user ) {
 

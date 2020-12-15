@@ -9,36 +9,75 @@ import user from '../middleware/user'
 const routes = [
 
 	{
+
 		path: '/',
 		name: 'Home',
-		component: Home
+		component: Home,
+
+		meta: {
+			
+			middleware: [user],
+			authenticated: false
+			
+		}
+
 	},
 
 	{
+
 		path: '/documents',
 		name: 'Documents',
 		component: Documents,
+
 		meta: {
-			middleware: [user]
+			
+			middleware: [user],
+			authenticated: true
+
 		}
+
 	},
 
 	{
+
 		path: '/admin',
 		name: 'AdminHome',
-		component: AdminHome
+		component: AdminHome,
+
+		meta: {
+			
+			middleware: [user],
+			authenticated: true
+			
+		}
+
 	},
 
 	{
 		path: '/admin/documents',
 		name: 'AdminDocuments',
-		component: AdminDocuments
+		component: AdminDocuments,
+
+		meta: {
+			
+			middleware: [user],
+			authenticated: true
+			
+		}
+
 	},
 
 	{
 		path: '/admin/users',
 		name: 'AdminUsers',
-		component: AdminUsers
+		component: AdminUsers,
+
+		meta: {
+			
+			middleware: [user],
+			authenticated: true
+			
+		}
 	}
 
 ]
