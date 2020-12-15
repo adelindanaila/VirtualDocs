@@ -31,7 +31,11 @@
 									</tr>
 								</thead>
 								<tbody class="bg-white divide-y divide-gray-200">
-									<tr v-for="user in users" :key="user._id" class="animate__animated animate__fadeIn animate__faster">
+									<tr
+										v-for="user in users" 
+										:key="user._id" 
+										class="animate__animated animate__fadeIn animate__faster"
+									>
 										<td class="px-6 py-4 whitespace-nowrap">
 											<div class="flex items-center">
 											<div class="flex-shrink-0 h-10 w-10">

@@ -64,9 +64,8 @@ schema.statics.user = async function( id ) {
 schema.statics.users = async function( id, limit ) {
 
     const data = await this.find( ).select('email').limit(limit)
-    if( data ) return data
-
-    throw Error('users_notfounded')
+    
+    return data
 
 }
 
