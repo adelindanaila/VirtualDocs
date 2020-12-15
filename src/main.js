@@ -1,45 +1,43 @@
 import { createApp } from 'vue'
+import axios from 'axios'
+
 import config from './config.json'
 import App from './App.vue'
 import router from './router'
+import store from './store'
 
 import './axios'
 
 import './assets/css/tailwind.css'
 import './assets/scss/custom.scss'
 import 'animate.css'
-import store from './store'
 
-// Multiple middleware
+// jwt check
 
-function nextFactory( context, middleware, index ) {
+router.beforeEach( async ( to, from, next ) => {
 
-	const subsequentMiddlware = middleware[index]
+	const token = localStorage.getItem('token')
 
-	if( !subsequentMiddlware )
-		return context.next
+	if( !token && to.meta.authenticated ) router.push(config.not_logged_page)
+	
+	else if( token ) {
 
-	return (...parameters) => {
+		try {
 
-		context.next( ...parameters )
-
-		const nextMiddleware = nextFactory( context, middleware, index + 1 )
-		subsequentMiddlware({  ...context, next: nextMiddleware } )
-
-	}
-
-}
-
-router.beforeEach( ( to, from, next ) => {
-
-	if( to.meta.middleware ) {
-
-		const middleware = Array.isArray( to.meta.middleware ) ? to.meta.middleware : [to.meta.middleware]
-		const context = { from, next, router, to }
-		const nextMiddleware = nextFactory( context, middleware, 1 )
-		const authenticated = to.meta.authenticated
-
-		return middleware[0]( { ...context, next: nextMiddleware, store, router, authenticated } )
+			const response = await axios.get('/user')
+			
+			store.dispatch('user', response.data)
+			store.dispatch('loading', false)
+		
+		}
+		
+		catch ( error ) {
+		
+			if( to.meta.authenticated ) router.push(config.not_logged_page)
+	
+			store.dispatch('loading', false)
+		
+		}
 
 	}
 

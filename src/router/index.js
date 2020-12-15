@@ -4,7 +4,6 @@ import Documents from '../views/Documents'
 import AdminHome from '../views/admin/Home'
 import AdminDocuments from '../views/admin/Documents'
 import AdminUsers from '../views/admin/Users'
-import user from '../middleware/user'
 
 const routes = [
 
@@ -16,7 +15,6 @@ const routes = [
 
 		meta: {
 			
-			middleware: [user],
 			authenticated: false
 			
 		}
@@ -31,7 +29,6 @@ const routes = [
 
 		meta: {
 			
-			middleware: [user],
 			authenticated: true
 
 		}
@@ -46,7 +43,6 @@ const routes = [
 
 		meta: {
 			
-			middleware: [user],
 			authenticated: true
 			
 		}
@@ -60,7 +56,6 @@ const routes = [
 
 		meta: {
 			
-			middleware: [user],
 			authenticated: true
 			
 		}
@@ -74,7 +69,6 @@ const routes = [
 
 		meta: {
 			
-			middleware: [user],
 			authenticated: true
 			
 		}
