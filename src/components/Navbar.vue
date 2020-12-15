@@ -92,7 +92,12 @@
                         >
                                 <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Your Profile</a>
                                 <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Settings</a>
-                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Sign out</a>
+                                <a
+                                    href="javascript:void(0);"
+                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                    role="menuitem"
+                                    @click="logout()"
+                                >Sign out</a>
                         </div>
                     </div>
                 </div>
@@ -372,6 +377,13 @@ export default {
                 document.body.style.overflowY = ''
                 
             }, 500)
+
+        },
+
+        logout( ) {
+
+            this.$store.dispatch('user', null)
+            localStorage.removeItem('token')
 
         }
         
