@@ -11,13 +11,7 @@ const routes = [
 
 		path: '/',
 		name: 'Home',
-		component: Home,
-
-		meta: {
-			
-			authenticated: false
-			
-		}
+		component: Home
 
 	},
 
@@ -43,7 +37,8 @@ const routes = [
 
 		meta: {
 			
-			authenticated: true
+			authenticated: true,
+			admin: true
 			
 		}
 
@@ -56,7 +51,8 @@ const routes = [
 
 		meta: {
 			
-			authenticated: true
+			authenticated: true,
+			admin: true
 			
 		}
 
@@ -69,7 +65,8 @@ const routes = [
 
 		meta: {
 			
-			authenticated: true
+			authenticated: true,
+			admin: true
 			
 		}
 	}

@@ -1,5 +1,6 @@
 import { createApp } from 'vue'
 import axios from 'axios'
+import jwt from 'jsonwebtoken'
 
 import config from './config.json'
 import App from './App.vue'
@@ -32,31 +33,46 @@ axios.interceptors.request.use(
 // jwt check
 router.beforeEach( async ( to, from, next ) => {
 
-	if( !store.state.token && to.meta.authenticated ) router.push(config.not_logged_page)
+	if( !store.state.token && to.meta.authenticated ) {
+		
+		store.dispatch('loading', false)
+		router.push(config.not_logged_page)
+
+		return next( )
+
+	}
 	
 	else if( store.state.token ) {
+
+		// admin check
+		let admin = jwt.decode(store.state.token).admin
+
+		if( to.meta.admin && !admin ) {
+			
+			store.dispatch('loading', false)
+			router.push(config.not_unauthorized_page)
+
+			return next( )
+
+		}
 
 		try {
 
 			const response = await axios.get('/user')
 			
 			store.dispatch('user', response.data)
-			store.dispatch('loading', false)
-		
+
 		}
 		
 		catch {
 		
 			if( to.meta.authenticated ) router.push(config.not_logged_page)
-	
-			store.dispatch('loading', false)
 		
 		}
 
 	}
 
-	else
-		store.dispatch('loading', false)
+	store.dispatch('loading', false)
 
 	return next( )
 

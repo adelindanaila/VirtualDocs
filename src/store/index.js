@@ -6,7 +6,8 @@ export default createStore({
 
 		loading: true,
 		token: localStorage.getItem('token'),
-		user: null
+		user: null,
+		admin: false
 
 	},
 
@@ -27,6 +28,12 @@ export default createStore({
 		user: ( state ) => {
 
 			return state.user
+
+		},
+
+		admin: ( state ) => {
+
+			return state.admin
 
 		}
 
@@ -50,6 +57,12 @@ export default createStore({
 
 			state.user = user
 
+		},
+
+		admin( state, admin ) {
+
+			state.admin = admin
+
 		}
 
 	},
@@ -71,6 +84,12 @@ export default createStore({
 		user( context, user ) {
 
 			context.commit('user', user)
+
+		},
+
+		admin( context, admin ) {
+
+			context.commit('admin', admin)
 
 		}
 

@@ -87,6 +87,7 @@
 <script>
 import axios from 'axios'
 import validator from 'validator'
+import jwt from 'jsonwebtoken'
 
 export default {
 
@@ -120,6 +121,7 @@ export default {
 
                 this.$store.dispatch('token', response.data.token)
                 this.$store.dispatch('user', response.data.user)
+                this.$store.dispatch('admin', jwt.decode(response.data.token).admin ? true : false)
                 
                 this.$router.push('/')
                 this.$parent.close_modal( )

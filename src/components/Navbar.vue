@@ -36,6 +36,7 @@
                         Contact
                     </a>
                     <router-link
+                        v-if="this.$store.state.admin"
                         to="/admin" 
                         class="text-base font-medium text-gray-500 hover:text-gray-900"
                         :class="this.$router.currentRoute.value.fullPath.includes('/admin') ? 'font-bold text-gray-900' : null"
@@ -388,6 +389,8 @@ export default {
 
             this.$store.dispatch('token', null)
             this.$store.dispatch('user', null)
+            this.$store.dispatch('admin', false)
+            
             this.$router.push('/')
             localStorage.removeItem('token')
 

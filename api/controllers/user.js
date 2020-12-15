@@ -1,4 +1,5 @@
-const model = require('../models/user')
+const user_model = require('../models/user')
+const admin_model = require('../models/admin')
 const jwt = require('jsonwebtoken')
 
 require('dotenv').config({ path: '../../.env' })
@@ -44,9 +45,9 @@ const get_errors = ( error ) => {
 }
 
 // json web token
-const createToken = ( id ) => {
+const createToken = ( id, admin ) => {
 
-    return jwt.sign({ id }, process.env.JWT_SECRET, {
+    return jwt.sign({ id, admin }, process.env.JWT_SECRET, {
 
         expiresIn: Number(process.env.JWT_EXPIRE) * 24 * 60 * 60
     
@@ -60,9 +61,24 @@ module.exports.signup = async (request, response) => {
 
     try {
 
-        const user = await model.create({ email, password })
-        const token = createToken( user._id )
+        let admin = false
 
+        const user = await user_model.create({ email, password })
+
+        try {
+
+            const data = await admin_model.admin( user._id )
+            admin = data._id
+
+        }
+
+        catch {
+
+            admin = null
+
+        }
+
+        const token = createToken( user._id, admin )
         response.status(200).json({ user, token })
 
     }
@@ -81,9 +97,24 @@ module.exports.signin = async ( request, response ) => {
     
     try {
 
-        const user = await model.login( email, password )
-        const token = createToken( user._id )
+        let admin = false
 
+        const user = await user_model.login( email, password )
+
+        try {
+
+            const data = await admin_model.admin( user._id )
+            admin = data._id
+
+        }
+
+        catch {
+
+            admin = null
+
+        }
+
+        const token = createToken( user._id, admin )
         response.status(200).json({ user, token })
 
     }
@@ -100,7 +131,7 @@ module.exports.user = async ( request, response ) => {
 
     try {
 
-        const data = await model.user( request.user )
+        const data = await user_model.user( request.user )
         response.status(200).json( data )
 
     }
@@ -119,7 +150,7 @@ module.exports.users = async ( request, response ) => {
 
     try {
 
-        const data = await model.users( request.user, Number(limit) )
+        const data = await user_model.users( request.user, Number(limit) )
         response.status(200).json( data )
 
     }
