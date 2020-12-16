@@ -45,7 +45,7 @@ export default {
     data: ( ) => ({
 
         categories: [ ],
-        search_value: null
+        search_value: ''
 
     }),
 
@@ -58,7 +58,7 @@ export default {
 
     methods: {
 
-        async data( search = null ) {
+        async data( search = '' ) {
 
             try {
 
@@ -79,7 +79,7 @@ export default {
 
         async search( ) {
 
-            await this.data( this.search_value ? this.search_value : null )
+            await this.data( this.search_value ? this.search_value : '' )
 
         }
 

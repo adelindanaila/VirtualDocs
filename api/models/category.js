@@ -18,7 +18,7 @@ schema.statics.categories = async function( search ) {
     
     let params = { }
     
-    if( search && search !== 'null' ) params = { name: new RegExp( search, 'i' ) }
+    if( search ) params = { name: new RegExp( search, 'i' ) }
     const data = await this.find( params )
 
     return data
