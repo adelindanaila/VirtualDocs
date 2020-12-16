@@ -24,7 +24,7 @@
                         <div
                             v-if="!search_value"
                             @click="this.$parent.data('')"
-                            class="flex justify-start items-center cursor-pointer text-gray-700 hover:text-indigo-400 hover:bg-indigo-100 rounded-md py-2 my-1"
+                            class="flex justify-start items-center cursor-pointer text-gray-700 hover:text-indigo-400 hover:bg-indigo-100 rounded-md py-2 my-1 transition"
                             :class="!category ? 'text-indigo-400 bg-indigo-100' : null"
                         >
                             <span class="bg-indigo-400 h-2 w-2 rounded-full ml-2"></span>
@@ -34,7 +34,7 @@
                             v-for="node in categories"
                             :key="node._id" 
                             @click="select(node._id)"
-                            class="flex justify-start items-center cursor-pointer text-gray-700 hover:text-indigo-400 hover:bg-indigo-100 rounded-md py-2 my-1"
+                            class="flex justify-start items-center cursor-pointer text-gray-700 hover:text-indigo-400 hover:bg-indigo-100 rounded-md py-2 my-1 transition"
                             :class="category === node._id ? 'text-indigo-400 bg-indigo-100' : null"
                         >
                             <span class="bg-indigo-400 h-2 w-2 rounded-full ml-2"></span>
