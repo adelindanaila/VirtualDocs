@@ -14,9 +14,12 @@ const schema = new Schema({
 })
 
 // static method for categories
-schema.statics.categories = async function( id ) {
-
-    const data = await this.find( )
+schema.statics.categories = async function( search ) {
+    
+    let params = { }
+    
+    if( search && search !== 'null' ) params = { name: new RegExp( search, 'i' ) }
+    const data = await this.find( params )
 
     return data
 

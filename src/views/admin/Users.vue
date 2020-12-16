@@ -194,12 +194,7 @@ export default {
 
 			try {
 
-				const params = new URLSearchParams({
-		
-					limit
-			
-				}).toString()
-
+				const params = new URLSearchParams({ limit }).toString()
 				const response = await axios.get(`/users?${params}`)
 				
 				this.users = response.data
