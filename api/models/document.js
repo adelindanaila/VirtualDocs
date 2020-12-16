@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const paginate = require('mongoose-paginate-v2')
 const Schema = mongoose.Schema
 
 const schema = new Schema({
@@ -42,15 +43,25 @@ const schema = new Schema({
 })
 
 // static method for documents
-schema.statics.documents = async function( category, limit ) {
+schema.statics.documents = async function( category, limit, page ) {
     
-    let params = { }
+    const options = {
 
-    if( category ) params = { category }
-    const data = await this.find( params ).limit(limit)
+        limit: Number.isNaN(limit) ? 10 : limit,
+        page: Number.isNaN(page) ? 1 : page
+
+    }
+
+    let query = { }
+    if( category ) query.category = category
+
+    const data = await this.paginate(query, options)
 
     return data
 
 }
+
+// paginate
+schema.plugin(paginate)
 
 module.exports = mongoose.model('document', schema)

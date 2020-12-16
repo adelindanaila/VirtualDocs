@@ -24,7 +24,7 @@
 							</thead>
 							<tbody class="bg-white divide-y divide-gray-200">
 								<tr
-									v-for="document in documents"
+									v-for="document in documents.docs"
 									:key="document._id"
 									:class="!this.admin ? 'cursor-pointer hover:text-indigo-400 hover:bg-indigo-100' : null"
 									class="animate__animated animate__fadeIn animate__faster"
@@ -61,74 +61,14 @@
 					</div>
 				</div>
 			</div>
-			<div id="pagination_wrapper" class="bg-white flex items-center justify-between">
-				<div class="flex-1 flex justify-between sm:hidden">
-					<a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:text-gray-500">
-					Previous
-					</a>
-					<a href="#" class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:text-gray-500">
-					Next
-					</a>
-				</div>
-				<div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
-					<div>
-						<p class="text-sm text-gray-500">
-							Showing
-							<span class="font-medium">1</span>
-							to
-							<span class="font-medium">10</span>
-							of
-							<span class="font-medium">97</span>
-							results
-						</p>
-					</div>
-					<div>
-						<nav class="relative z-0 inline-flex shadow-sm -space-x-px" aria-label="Pagination">
-							<a href="#" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-100 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-								<span class="sr-only">Previous</span>
-								<!-- Heroicon name: chevron-left -->
-								<svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-									<path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
-								</svg>
-							</a>
-							<a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-100 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-							1
-							</a>
-							<a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-100 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-							2
-							</a>
-							<a href="#" class="hidden md:inline-flex relative items-center px-4 py-2 border border-gray-100 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-							3
-							</a>
-							<span class="relative inline-flex items-center px-4 py-2 border border-gray-100 bg-white text-sm font-medium text-gray-500">
-							...
-							</span>
-							<a href="#" class="hidden md:inline-flex relative items-center px-4 py-2 border border-gray-100 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-							8
-							</a>
-							<a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-100 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-							9
-							</a>
-							<a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-100 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-							10
-							</a>
-							<a href="#" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-100 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-								<span class="sr-only">Next</span>
-								<!-- Heroicon name: chevron-right -->
-								<svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-									<path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-								</svg>
-							</a>
-						</nav>
-					</div>
-				</div>
-			</div>
+			<Pagination :data="documents" />
 		</div>
 	</div>
 </template>
 
 <script>
 import Categories from '@/components/common/Categories'
+import Pagination from '@/components/common/Pagination'
 import axios from 'axios'
 import moment from 'moment'
 
@@ -139,13 +79,15 @@ export default {
 	name: 'DocumentsComponent',
 	components: {
 
-		Categories
+		Categories,
+		Pagination
 
 	},
 
 	data: ( ) => ({
 
 		documents: [ ],
+		page: 1,
 		category: '',
 		resizeTimeout: undefined
 
@@ -188,7 +130,7 @@ export default {
 		window.addEventListener('resize', ( ) => {
 
 			clearTimeout( this.resizeTimeout )
-			this.resizeTimeout = setTimeout(( ) => this.data( this.category ), 500 )
+			this.resizeTimeout = setTimeout(( ) => this.data( this.category, this.page ), 500 )
 
 		})
 
@@ -196,19 +138,20 @@ export default {
 
 	methods: {
 
-		async data( category = '' ) {
+		async data( category = '', page = 1 ) {
 
 			this.category = category
+			this.page = page
 
 			const documents_content = document.getElementById('documents_content').offsetHeight
 			const thead = document.querySelector('table thead').offsetHeight
-			const pagination_wrapper = document.getElementById('pagination_wrapper').offsetHeight
+			// const pagination_wrapper = document.getElementById('pagination_wrapper').offsetHeight
 
-			const limit = Math.floor( (documents_content - thead - pagination_wrapper) / 73 )
+			const limit = Math.floor( (documents_content - thead - 38) / 73 )
 
 			try {
 
-                const params = new URLSearchParams({ category, limit }).toString()
+                const params = new URLSearchParams({ category, limit, page }).toString()
 				const response = await axios.get(`/documents?${params}`)
                 
 				this.documents = response.data
@@ -220,6 +163,12 @@ export default {
                 console.log(error)
 
             }
+
+		},
+
+		async pagination( page ) {
+
+			await this.data( this.category, page )
 
 		},
 

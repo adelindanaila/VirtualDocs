@@ -23,9 +23,9 @@
                 </p>
             </div>
             <div>
-                <nav v-if="this.data.totalPages" class="relative z-0 inline-flex shadow-sm -space-x-px" aria-label="Pagination">
+                <nav v-if="this.data.totalPages > 1" class="relative z-0 inline-flex shadow-sm -space-x-px" aria-label="Pagination">
                     <a
-                        @click="this.$parent.data( this.data.prevPage )"
+                        @click="this.$parent.pagination( this.data.prevPage )"
                         :class="this.data.hasPrevPage ? null : 'pointer-events-none'"
                         class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-100 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
                         href="javascript:void(0);"
@@ -40,7 +40,7 @@
                         v-for="page in this.data.totalPages"
                         v-show="Math.abs(page - this.data.page) < 3 || page === this.data.totalPages - 1 || page === 0"
                         :key="`page-${page}`"
-                        @click="this.$parent.data( page )"
+                        @click="this.$parent.pagination( page )"
                         :class="this.data.page === page ? 'bg-indigo-100 text-indigo-400 pointer-events-none' : null"
                         class="relative inline-flex items-center px-4 py-2 border border-gray-100 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 transition"
                         href="javascript:void(0);"
@@ -49,7 +49,7 @@
                         ...
                     </span> -->
                     <a
-                        @click="this.$parent.data( this.data.nextPage )"
+                        @click="this.$parent.pagination( this.data.nextPage )"
                         :class="this.data.hasNextPage ? null : 'pointer-events-none'"
                         class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-100 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
                         href="javascript:void(0);"

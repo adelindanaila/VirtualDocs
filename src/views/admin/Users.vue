@@ -151,6 +151,12 @@ export default {
 
 			}
 
+		},
+
+		async pagination( page ) {
+
+			await this.data( page )
+
 		}
 
 	}

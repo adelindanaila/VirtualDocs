@@ -2,11 +2,12 @@ const model = require('../models/document')
 
 module.exports.documents = async ( request, response ) => {
 
-    const { category, limit } = request.query
+    const { category, limit, page } = request.query
+    
 
     try {
         
-        const data = await model.documents( category, Number(limit) )
+        const data = await model.documents( category, Number(limit), Number(page) )
         response.status(200).json( data )
 
     }
