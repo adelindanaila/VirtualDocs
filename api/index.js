@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 const user = require('./routes/user')
 const category = require('./routes/category')
+const document = require('./routes/document')
 
 require('dotenv').config({ path: '../.env' })
 
@@ -30,3 +31,4 @@ mongoose.connect(`mongodb+srv://${process.env.DATABASE_USER}:${process.env.DATAB
 // routes
 app.use(user)
 app.use(category)
+app.use(document)

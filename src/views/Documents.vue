@@ -36,11 +36,9 @@ export default {
 
 		const navbar = document.getElementById('navbar').offsetHeight
 		const hero = document.getElementById('hero').offsetHeight
-		const documents_disclaimer = document.getElementById('documents_disclaimer').offsetHeight
 		
 		document.getElementById('documents_wrapper').style.height = `calc(100vh - ${navbar + hero}px)`
-		document.getElementById('documents_content').style.height = `calc(100% - ${documents_disclaimer}px)`
-
+	
 	}
 }
 </script>

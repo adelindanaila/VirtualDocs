@@ -38,7 +38,6 @@ export default {
 		const hero = document.getElementById('hero').offsetHeight
 
 		document.getElementById('admin_wrapper').style.height = `calc(100vh - ${navbar + hero}px)`
-		document.getElementById('documents_content').style.height = '100%'
 
 	}
 }

@@ -22,12 +22,23 @@
                     </div>
                     <div class="text-sm px-3 mt-2">
                         <div
-                            v-for="category in categories"
-                            :key="category._id" 
+                            v-if="!search_value"
+                            @click="this.$parent.data('')"
                             class="flex justify-start items-center cursor-pointer text-gray-700 hover:text-indigo-400 hover:bg-indigo-100 rounded-md py-2 my-1"
+                            :class="!category ? 'text-indigo-400 bg-indigo-100' : null"
                         >
                             <span class="bg-indigo-400 h-2 w-2 rounded-full ml-2"></span>
-                            <div class="flex-grow font-medium px-2">{{ category.name }}</div>
+                            <div class="flex-grow font-medium px-2">All</div>
+                        </div>
+                        <div
+                            v-for="node in categories"
+                            :key="node._id" 
+                            @click="select(node._id)"
+                            class="flex justify-start items-center cursor-pointer text-gray-700 hover:text-indigo-400 hover:bg-indigo-100 rounded-md py-2 my-1"
+                            :class="category === node._id ? 'text-indigo-400 bg-indigo-100' : null"
+                        >
+                            <span class="bg-indigo-400 h-2 w-2 rounded-full ml-2"></span>
+                            <div class="flex-grow font-medium px-2">{{ node.name }}</div>
                         </div>
                     </div>
                     
@@ -41,6 +52,8 @@
 import axios from 'axios'
 
 export default {
+
+    props: ['category'],
     
     data: ( ) => ({
 
@@ -55,7 +68,6 @@ export default {
 
     },
     
-
     methods: {
 
         async data( search = '' ) {
@@ -80,6 +92,14 @@ export default {
         async search( ) {
 
             await this.data( this.search_value ? this.search_value : '' )
+
+        },
+
+        async select( category ) {
+
+            this.search_value = ''
+            this.$parent.data(category)
+            await this.data( )
 
         }
 
