@@ -32,7 +32,7 @@
 								</thead>
 								<tbody class="bg-white divide-y divide-gray-200">
 									<tr
-										v-for="user in users" 
+										v-for="user in users.docs" 
 										:key="user._id" 
 										class="animate__animated animate__fadeIn animate__faster"
 									>
@@ -72,68 +72,7 @@
 						</div>
 					</div>
 				</div>
-				<div id="pagination_wrapper" class="bg-white flex items-center justify-between">
-					<div class="flex-1 flex justify-between sm:hidden">
-						<a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:text-gray-500">
-						Previous
-						</a>
-						<a href="#" class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:text-gray-500">
-						Next
-						</a>
-					</div>
-					<div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
-						<div>
-							<p class="text-sm text-gray-500">
-								Showing
-								<span class="font-medium">1</span>
-								to
-								<span class="font-medium">10</span>
-								of
-								<span class="font-medium">97</span>
-								results
-							</p>
-						</div>
-						<div>
-							<nav class="relative z-0 inline-flex shadow-sm -space-x-px" aria-label="Pagination">
-								<a href="#" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-100 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-									<span class="sr-only">Previous</span>
-									<!-- Heroicon name: chevron-left -->
-									<svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-										<path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
-									</svg>
-								</a>
-								<a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-100 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-								1
-								</a>
-								<a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-100 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-								2
-								</a>
-								<a href="#" class="hidden md:inline-flex relative items-center px-4 py-2 border border-gray-100 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-								3
-								</a>
-								<span class="relative inline-flex items-center px-4 py-2 border border-gray-100 bg-white text-sm font-medium text-gray-500">
-								...
-								</span>
-								<a href="#" class="hidden md:inline-flex relative items-center px-4 py-2 border border-gray-100 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-								8
-								</a>
-								<a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-100 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-								9
-								</a>
-								<a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-100 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-								10
-								</a>
-								<a href="#" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-100 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-									<span class="sr-only">Next</span>
-									<!-- Heroicon name: chevron-right -->
-									<svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-										<path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-									</svg>
-								</a>
-							</nav>
-						</div>
-					</div>
-				</div>
+				<Pagination :data="users" />
 			</div>
 		</div>
 
@@ -143,6 +82,7 @@
 
 <script>
 import Hero from '@/components/common/Hero'
+import Pagination from '@/components/common/Pagination'
 import Sidebar from '@/components/admin/Sidebar'
 
 import axios from 'axios'
@@ -152,7 +92,8 @@ export default {
 	name: 'Users',
 	components: {
 
-        Hero,
+		Hero,
+		Pagination,
 		Sidebar
 		
 	},
@@ -160,6 +101,7 @@ export default {
 	data: ( ) => ({
 
 		users: [ ],
+		page: 1,
 		resizeTimeout: undefined
 
     }),
@@ -171,7 +113,7 @@ export default {
 		window.addEventListener('resize', ( ) => {
 
 			clearTimeout( this.resizeTimeout )
-			this.resizeTimeout = setTimeout( this.data, 500 )
+			this.resizeTimeout = setTimeout(( ) => this.data(this.page), 500 )
 
 		})
 
@@ -179,7 +121,9 @@ export default {
 
 	methods: {
 
-		async data( ) {
+		async data( page = 1 ) {
+
+			this.page = page
 
 			const navbar = document.getElementById('navbar').offsetHeight
 			const hero = document.getElementById('hero').offsetHeight
@@ -194,9 +138,9 @@ export default {
 
 			try {
 
-				const params = new URLSearchParams({ limit }).toString()
+				const params = new URLSearchParams({ limit, page }).toString()
 				const response = await axios.get(`/users?${params}`)
-				
+
 				this.users = response.data
 			
 			}

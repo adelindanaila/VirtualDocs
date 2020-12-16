@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const paginate = require('mongoose-paginate-v2')
 const { isEmail } = require('validator')
 const bcrypt = require('bcrypt')
 
@@ -61,13 +62,23 @@ schema.statics.user = async function( id ) {
 }
 
 // static method for users
-schema.statics.users = async function( id, limit ) {
+schema.statics.users = async function( limit, page ) {
 
-    const data = await this.find( ).select('email').limit(limit)
+    const options = {
+
+        limit: Number.isNaN(limit) ? 10 : limit,
+        page: Number.isNaN(page) ? 1 : page,
+        select: ['email']
+
+    }
+
+    const data = await this.paginate({ }, options)
     
     return data
 
 }
 
+// paginate
+schema.plugin(paginate)
 
 module.exports = mongoose.model('user', schema)

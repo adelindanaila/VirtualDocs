@@ -146,11 +146,11 @@ module.exports.user = async ( request, response ) => {
 
 module.exports.users = async ( request, response ) => {
 
-    const { limit } = request.query
+    const { limit, page } = request.query
 
     try {
 
-        const data = await user_model.users( request.user, Number(limit) )
+        const data = await user_model.users( Number(limit), Number(page) )
         response.status(200).json( data )
 
     }
