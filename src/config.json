@@ -1,6 +1,6 @@
 {
     "mode": "development",
-    "api_url": "http://localhost:4000/",
+    "api_url": "http://localhost:4000",
     "not_logged_page": "/404",
     "not_unauthorized_page": "/404"
 }

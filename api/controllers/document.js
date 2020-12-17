@@ -19,3 +19,10 @@ module.exports.documents = async ( request, response ) => {
     }
 
 }
+
+module.exports.add = async ( request, response ) => {
+
+    console.log(request)
+    response.status(200).json({ data: 'test' })
+
+}

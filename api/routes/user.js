@@ -9,6 +9,6 @@ router.post('/user/signup', controller.signup)
 router.post('/user/signin', controller.signin)
 
 router.get('/user', user_authorization, controller.user)
-router.get('/users', [user_authorization, admin_authorization], controller.users)
+router.get('/users', admin_authorization, controller.users)
 
 module.exports = router

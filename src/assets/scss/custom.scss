@@ -16,7 +16,8 @@ body::-webkit-scrollbar {
 .custom-scrollbar::-webkit-scrollbar-thumb,
 body::-webkit-scrollbar-thumb {
 
-    background-color: #4F46E5;
+    --tw-bg-opacity: 1;
+    background-color: rgba(129, 140, 248, var(--tw-bg-opacity));
     border-radius: 5px;
 
 }
@@ -28,6 +29,62 @@ tr.animate__animated {
             -webkit-animation-delay: $i * 75ms;
             animation-delay: $i * 75ms;
         }
+    }
+
+}
+
+#add_documents_modal_content {
+
+    max-height: calc(100vh - 4rem);
+
+    #modal_content {
+
+        overflow-y: auto;
+        max-height: calc(100vh - 4rem - 62px);
+
+        #dropzone_wrapper {
+
+            ul li.animate__animated {
+            
+                @for $i from 1 through 30 {
+                    &:nth-of-type(#{$i}) {
+                        -webkit-animation-delay: $i * 75ms;
+                        animation-delay: $i * 75ms;
+                    }
+                }
+    
+            }
+    
+            #dropzone {
+    
+                .dz-preview {
+            
+                    display: none;
+            
+                }
+            
+                &:hover {
+            
+                    span {
+            
+                        --tw-text-opacity: 1;
+                        color: rgba(129, 140, 248, var(--tw-text-opacity));
+            
+                    }
+            
+                    svg {
+            
+                        --tw-text-opacity: 1;
+                        color: rgba(129, 140, 248, var(--tw-text-opacity));
+            
+                    }
+            
+                }
+            
+            }
+    
+        }
+
     }
 
 }
