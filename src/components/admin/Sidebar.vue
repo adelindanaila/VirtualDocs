@@ -39,12 +39,12 @@
         <div>
             <div class="text-sm px-3 my-2">
                 <a
-                    @click="add_category_open( )"
+                    @click="manage_categories_open( )"
                     href="javascript:void(0);" 
                     class="flex justify-start items-center cursor-pointer text-gray-700 hover:text-indigo-400 hover:bg-indigo-100 rounded-md py-2 my-1 transition"
                 >
                     <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"></path></svg>
-                    <div class="flex-grow font-medium px-2">Add category</div>
+                    <div class="flex-grow font-medium px-2">Manage categories</div>
                 </a>
             </div>
 
@@ -64,12 +64,12 @@
     </div>
 
     <AddDocuments v-if="add_documents" />
-    <AddCategory v-if="add_category" />
+    <Categories v-if="manage_categories" />
 </template>
 
 <script>
 import AddDocuments from '@/components/admin/AddDocuments'
-import AddCategory from '@/components/admin/AddCategory'
+import Categories from '@/components/admin/Categories'
 
 export default {
     
@@ -77,14 +77,14 @@ export default {
 	components: {
 
         AddDocuments,
-        AddCategory
+        Categories
 
     },
     
     data: ( ) => ({
 
         add_documents: false,
-        add_category: false
+        manage_categories: false
 
     }),
 
@@ -108,21 +108,21 @@ export default {
 
         },
 
-        add_category_open( ) {
+        manage_categories_open( ) {
 
-            this.add_category = true
+            this.manage_categories = true
             setTimeout(( ) => {
 
-                document.getElementById('add_category_modal_content').classList.remove('animate__pulse')
+                document.getElementById('manage_categories_modal_content').classList.remove('animate__pulse')
 
             }, 500)
 
         },
 
-        add_category_close( ) {
+        manage_categories_close( ) {
 
             document.body.style.overflowY = ''
-            this.add_category = false
+            this.manage_categories = false
 
         }
 

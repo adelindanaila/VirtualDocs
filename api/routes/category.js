@@ -6,5 +6,6 @@ const router = Router( )
 
 router.get('/categories', controller.categories)
 router.post('/category/edit', admin_authorization, controller.edit)
+router.post('/category/remove', admin_authorization, controller.remove)
 
 module.exports = router

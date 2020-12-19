@@ -1,6 +1,6 @@
 <template>
     <div class="fixed z-10 inset-0 overflow-y-auto">
-        <div id="add_category_modal_wrapper" class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0 animate__animated animate__fadeIn animate__faster">
+        <div id="manage_categories_modal_wrapper" class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0 animate__animated animate__fadeIn animate__faster">
             <div class="fixed inset-0 transition-opacity" aria-hidden="true">
                 <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
                 </div>
@@ -8,7 +8,7 @@
                 <!-- This element is to trick the browser into centering the modal contents. -->
                 <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
 
-                <div id="add_category_modal_content" class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full animate__animated animate__pulse animate__faster" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+                <div id="manage_categories_modal_content" class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full animate__animated animate__pulse animate__faster" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
                     <div v-if="loading" class="w-full h-full absolute top-0 left-0 z-10 flex items-center justify-center bg-gray-100 bg-opacity-75 animate__animated animate__fadeIn animate__faster" style="height: calc(100% - 62px);">
                         <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
                     </div>
@@ -37,20 +37,42 @@
                                     />
                                     <span v-else class="ml-2 flex-1 w-0 truncate">{{ category.name }}</span>
                                 </div>
-                                <div class="flex items-center">
-                                    <svg
-                                        v-if="category.edit" 
-                                        @click="edit(category._id, index)"
-                                        class="w-5 h-5 cursor-pointer stroke-current transition hover:text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                    <svg
+                                <div>
+                                    <div v-if="!category.delete"
+                                        class="flex items-center">
+                                        <svg
+                                            v-if="category.edit" 
+                                            @click="edit( category._id, index )"
+                                            class="w-5 h-5 cursor-pointer stroke-current transition hover:text-indigo-400 select-none" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                        <svg
+                                            v-else
+                                            @click="categories[ index ].edit = true"
+                                            class="w-5 h-5 cursor-pointer stroke-current transition hover:text-indigo-400 select-none" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                                        <svg
+                                            v-if="category.edit" 
+                                            @click="categories[ index ].edit = false"
+                                            class="w-5 h-5 cursor-pointer stroke-current transition hover:text-indigo-400 select-none" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                        <svg
+                                            v-else
+                                            @click="categories[ index ].delete = true"
+                                            class="w-5 h-5 cursor-pointer stroke-current transition hover:text-indigo-400 select-none" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                                    </div>
+                                    <div
                                         v-else
-                                        @click="categories[ index ].edit = true"
-                                        class="w-5 h-5 cursor-pointer stroke-current transition hover:text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
-                                    <svg
-                                        v-if="category.edit" 
-                                        @click="categories[ index ].edit = false"
-                                        class="w-5 h-5 cursor-pointer stroke-current transition hover:text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                    <svg v-else class="w-5 h-5 cursor-pointer stroke-current transition hover:text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                                        class="animate__animated animate__fadeIn animate__faster"
+                                    >
+                                        <a
+                                            @click="remove( category._id, index )"
+                                            href="javascript:void(0);"
+                                            class="font-medium text-red-600 transition hover:text-red-500"
+                                        >Yes, remove</a>
+                                        <span class="mx-1">or</span>
+                                        <a
+                                            @click="categories[ index ].delete = false"
+                                            href="javascript:void(0);"
+                                            class="font-medium transition hover:text-indigo-500"
+                                        >Cancel</a>
+                                    </div>
                                 </div>
                             </li>
                         </ul>
@@ -96,14 +118,14 @@ export default {
 
         close( ) {
 
-            const wrapper = document.getElementById('add_category_modal_wrapper')
-            const content = document.getElementById('add_category_modal_content')
+            const wrapper = document.getElementById('manage_categories_modal_wrapper')
+            const content = document.getElementById('manage_categories_modal_content')
             
             wrapper.classList.remove('animate__fadeIn')
             wrapper.classList.add('animate__fadeOut')
             content.classList.add('animate__pulse')
 
-            setTimeout(( ) => this.$parent.add_category_close( ), 500)
+            setTimeout(( ) => this.$parent.manage_categories_close( ), 500)
 
         },
 
@@ -157,6 +179,33 @@ export default {
                     console.log(error)
 
                 }
+
+            }
+
+        },
+
+        async remove( id, index ) {
+
+            try {
+
+                const element = document.querySelector(`#modal_content li[data-index="${index}"]`)
+
+                await axios.post('/category/remove', {
+
+                    category: id
+
+                })
+
+                element.classList.remove('animate__fadeIn', 'animate__faster')
+                element.classList.add('animate__fadeOut', 'animate__faster2x')
+
+                setTimeout(( ) => this.categories.splice(index, 1), 250)  
+
+            }
+
+            catch( error ) {
+
+                console.log( error )
 
             }
 

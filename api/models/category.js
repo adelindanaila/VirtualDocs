@@ -13,7 +13,6 @@ const schema = new Schema({
 
 })
 
-// static method for categories
 schema.statics.categories = async function( search ) {
     
     let params = { }
@@ -25,10 +24,29 @@ schema.statics.categories = async function( search ) {
 
 }
 
-// static method for categories
 schema.statics.edit = async function( category, name ) {
     
-    const data = await this.findByIdAndUpdate({ '_id': category }, { name })
+    const data = await this.updateOne({
+
+        _id: category
+            
+    }, {
+
+        $set: {
+
+            name
+
+        }
+
+    })
+
+    return data
+
+}
+
+schema.statics.remove = async function( category ) {
+    
+    const data = await this.deleteOne({ _id: category })
 
     return data
 
