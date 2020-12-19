@@ -9,9 +9,6 @@
                 <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
 
                 <div id="manage_categories_modal_content" class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full animate__animated animate__pulse animate__faster" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
-                    <div v-if="loading" class="w-full h-full absolute top-0 left-0 z-10 flex items-center justify-center bg-gray-100 bg-opacity-75 animate__animated animate__fadeIn animate__faster" style="height: calc(100% - 62px);">
-                        <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
-                    </div>
                     <div id="modal_content" class="bg-white px-4 pt-5 pb-5 sm:p-6 sm:pb-6 relative custom-scrollbar">
 
                         <ul
@@ -23,7 +20,7 @@
                                 :key="category._id"
                                 :data-index="index"
                                 style="height: 47px;"
-                                class="pl-3 pr-4 py-3 flex items-center justify-between text-sm animate__animated animate__fadeIn animate__faster"
+                                class="px-3 flex items-center justify-between text-sm animate__animated animate__fadeIn animate__faster"
                             >
                                 <div class="w-0 flex-1 flex items-center">
                                     <svg class="flex-shrink-0 h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"></path></svg>
@@ -77,12 +74,34 @@
                             </li>
                         </ul>
 
+                        <div class="border border-gray-300 border-dashed mt-4 rounded-md divide-y divide-gray-200 px-3 flex items-center justify-between text-sm animate__animated animate__fadeIn animate__faster" style="height: 47px;">
+                            <div class="w-0 flex-1 flex items-center">
+                                <svg class="flex-shrink-0 h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"></path></svg>
+                                <input
+                                    @change="error_checker"
+                                    type="text" 
+                                    id="input_add"
+                                    class="focus:ring-indigo-500 focus:border-indigo-500 block w-full border sm:text-sm border-gray-300 rounded-md px-2 py-1 mx-2 transition" 
+                                    placeholder="Type here.."
+                                />
+                            </div>
+
+                            <button
+                                @click="add( )"
+                                type="button"
+                                class="flex items-center rounded-md border border-transparent shadow-sm px-4 bg-indigo-600 font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 text-sm"
+                                style="height: 30px;"
+                            >
+                            Add
+                            </button>
+
+                        </div>
+
                     </div>
                     <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                         <button
                             @click="close( )"
                             type="button"
-                            :class="this.loading ? 'bg-opacity-80 pointer-events-none' : null"
                             class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
                         >
                             Close
@@ -101,8 +120,7 @@ export default {
 
     data: ( ) => ({
 
-        categories: [ ],
-        loading: false
+        categories: [ ]
 
     }),
 
@@ -206,6 +224,28 @@ export default {
             catch( error ) {
 
                 console.log( error )
+
+            }
+
+        },
+
+        async add( ) {
+
+            const input = document.getElementById('input_add')
+
+            if( !input.value.length )
+                this.error_add_classes( input )
+
+            else {
+
+                const response = await axios.post('/category/add', {
+
+                    name: input.value
+
+                })
+
+                input.value = ''
+                this.categories = [...this.categories, response.data] 
 
             }
 

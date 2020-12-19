@@ -72,3 +72,23 @@ module.exports.remove = async ( request, response ) => {
     }
 
 }
+
+module.exports.add = async ( request, response ) => {
+
+    const { name } = request.body
+
+    try {
+
+        const data = await category_model.create( { name } )
+        response.status(200).json( data )
+
+    }
+
+    catch (error) {
+        
+        console.log(error)
+        response.status(400).json( error )
+
+    }
+
+}

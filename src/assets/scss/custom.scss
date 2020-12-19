@@ -89,17 +89,6 @@ tr.animate__animated.animate__fadeIn {
 
         #dropzone_wrapper {
 
-            ul li.animate__animated.animate__fadeIn {
-            
-                @for $i from 1 through 30 {
-                    &:nth-of-type(#{$i}) {
-                        -webkit-animation-delay: $i * 75ms;
-                        animation-delay: $i * 75ms;
-                    }
-                }
-    
-            }
-
             #dropzone {
     
                 .dz-preview {
@@ -128,6 +117,21 @@ tr.animate__animated.animate__fadeIn {
             
             }
     
+        }
+
+    }
+
+}
+
+#modal_content {
+
+    ul li.animate__animated.animate__fadeIn {
+                
+        @for $i from 1 through 30 {
+            &:nth-of-type(#{$i}) {
+                -webkit-animation-delay: $i * 75ms;
+                animation-delay: $i * 75ms;
+            }
         }
 
     }
