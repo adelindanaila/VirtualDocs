@@ -26,6 +26,7 @@ const upload = multer({
 
 })
 
+router.get('/document', controller.document)
 router.get('/documents', controller.documents)
 router.post('/document/add', [admin_authorization, upload.single('file')], controller.add)
 

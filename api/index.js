@@ -1,6 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
+const path = require('path')
 const user = require('./routes/user')
 const category = require('./routes/category')
 const document = require('./routes/document')
@@ -32,3 +33,6 @@ mongoose.connect(`mongodb+srv://${process.env.DATABASE_USER}:${process.env.DATAB
 app.use(user)
 app.use(category)
 app.use(document)
+
+// public files
+app.use(`/${process.env.UPLOAD_FOLDER}`, express.static(path.join(__dirname, `../${process.env.UPLOAD_FOLDER}`)))

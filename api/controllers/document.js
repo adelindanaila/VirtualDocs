@@ -1,6 +1,25 @@
 const model = require('../models/document')
 const fs = require('fs')
 
+module.exports.document = async ( request, response ) => {
+
+    const { document } = request.query
+    
+    try {
+        
+        const data = await model.findOne( { _id: document } )
+        response.status(200).json( data )
+
+    }
+
+    catch (error) {
+        
+        response.status(400).json( error )
+
+    }
+
+}
+
 module.exports.documents = async ( request, response ) => {
 
     const { category, limit, page } = request.query

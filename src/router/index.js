@@ -1,6 +1,8 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import Home from '../views/Home'
 import Documents from '../views/Documents'
+import Document from '../views/Document'
+
 import AdminHome from '../views/admin/Home'
 import AdminDocuments from '../views/admin/Documents'
 import AdminUsers from '../views/admin/Users'
@@ -19,13 +21,15 @@ const routes = [
 
 		path: '/documents',
 		name: 'Documents',
-		component: Documents,
+		component: Documents
 
-		meta: {
-			
-			authenticated: true
+	},
 
-		}
+	{
+
+		path: '/document/:name/:id',
+		name: 'Document',
+		component: Document
 
 	},
 
