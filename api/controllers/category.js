@@ -18,3 +18,22 @@ module.exports.categories = async ( request, response ) => {
     }
 
 }
+
+module.exports.edit = async ( request, response ) => {
+
+    const { category, name } = request.body
+
+    try {
+
+        const data = await model.edit( category, name )
+        response.status(200).json( data )
+
+    }
+
+    catch (error) {
+        
+        response.status(400).json( error )
+
+    }
+
+}

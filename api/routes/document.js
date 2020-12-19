@@ -1,8 +1,11 @@
 const { Router } = require('express')
 const multer = require('multer')
+const controller = require('../controllers/document')
+const admin_authorization = require('../authorizations/admin')
 
 require('dotenv').config({ path: '../../.env' })
 
+const router = Router( )
 const upload = multer({
     
     dest: `../${process.env.UPLOAD_FOLDER}/`,
@@ -22,11 +25,6 @@ const upload = multer({
     }
 
 })
-
-const controller = require('../controllers/document')
-const admin_authorization = require('../authorizations/admin')
-
-const router = Router( )
 
 router.get('/documents', controller.documents)
 router.post('/document/add', [admin_authorization, upload.single('file')], controller.add)

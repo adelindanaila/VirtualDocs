@@ -25,4 +25,13 @@ schema.statics.categories = async function( search ) {
 
 }
 
+// static method for categories
+schema.statics.edit = async function( category, name ) {
+    
+    const data = await this.findByIdAndUpdate({ '_id': category }, { name })
+
+    return data
+
+}
+
 module.exports = mongoose.model('categorie', schema)
