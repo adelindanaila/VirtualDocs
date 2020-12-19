@@ -43,7 +43,7 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="mt-2">File is too big ({{ (file.size / 1000000).toFixed(2) }}MiB). Max filesize: {{ document_max_size( ) }}MiB.</div>
+                                    <div class="mt-2">{{ file.error }}</div>
                                 </li>
 
                                 <li
@@ -125,8 +125,9 @@
                                 </li>
 
                             </ul>
+
                             <div
-                                v-if="this.files < document_max_files( )"
+                                v-if="this.files.length < Number(this.document_max_files)"
                                 id="dropzone"
                                 class="flex justify-center w-full py-8 border-2 border-gray-300 border-dashed rounded-md cursor-pointer transition hover:border-indigo-400"
                             >
@@ -173,7 +174,6 @@
 import Dropzone from 'dropzone'
 import axios from 'axios'
 import _ from 'lodash'
-import config from '@/config.json'
 
 export default {
 
@@ -201,12 +201,12 @@ export default {
         this.dropzone = new Dropzone('#dropzone', {
 
             autoProcessQueue: false,
-            parallelUploads: Number(config.document_max_files),
-            maxFiles: Number(config.document_max_files),
+            parallelUploads: Number(this.document_max_files),
+            maxFiles: Number(this.document_max_files),
             acceptedFiles: '.pdf',
-            maxFilesize: Number(config.document_max_size),
+            maxFilesize: Number(this.document_max_size),
 
-            url: `${config.api_url}/document/add`,
+            url: `${this.api_url}/document/add`,
             headers: {
 
                 'Authorization': `Bearer ${this.$store.state.token}`
@@ -235,16 +235,18 @@ export default {
 
                 })
 
-                _dropzone.on('error', function( data ) {
+                _dropzone.on('error', function( file, response ) {
+                    
+                    file.error = response
 
                     _this.files.splice( -1, 1 )
-                    _this.rejected_files = [ ..._this.rejected_files, data ]
+                    _this.rejected_files = [ ..._this.rejected_files, file ]
 
                 })
 
                 _dropzone.on('complete', function( ) {
 
-                    if( this.getQueuedFiles( ).length === 0 && this.getUploadingFiles( ).length === 0 ) {
+                    if( _this.loading && this.getQueuedFiles( ).length === 0 && this.getUploadingFiles( ).length === 0 ) {
 
                         this.removeAllFiles( )
                         _this.close( )
@@ -398,18 +400,6 @@ export default {
             input.classList.add('border-gray-300')
 
             if( select ) input.classList.remove('text-red-700', 'text-opacity-90')
-
-        },
-
-        document_max_size( ) {
-
-            return Number(config.document_max_size)
-
-        },
-
-        document_max_files( ) {
-
-            return Number(config.document_max_files)
 
         }
 

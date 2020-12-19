@@ -81,6 +81,7 @@ router.beforeEach( async ( to, from, next ) => {
 
 const app = createApp(App)
 
+app.config.globalProperties = config
 app.config.devtools = config.mode === 'development'
 
 app.use(store)
