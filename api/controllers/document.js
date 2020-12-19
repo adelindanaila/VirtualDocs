@@ -34,7 +34,7 @@ module.exports.add = async ( request, response ) => {
             name: input0.trim( ),
             description: input2.trim( ),
             file: file.filename,
-            category: input1
+            category: input1 === 'uncategorized' ? null : input1
 
         })
 

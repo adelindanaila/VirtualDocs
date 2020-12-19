@@ -27,8 +27,7 @@ const schema = new Schema({
 
     category: {
 
-        type: Schema.ObjectId,
-        required: [true, 'file_missing']
+        type: Schema.ObjectId
 
     },
 

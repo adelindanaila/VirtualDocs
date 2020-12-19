@@ -98,6 +98,7 @@
                                                 class="mt-1 block w-full px-2 py-1 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition"
                                             >
                                                 <option value="" disabled selected hidden>Click to select</option>
+                                                <option value="uncategorized">Uncategorized</option>
                                                 <option
                                                     v-for="category in categories"
                                                     :key="category._id"

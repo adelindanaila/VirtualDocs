@@ -74,7 +74,11 @@
                             </li>
                         </ul>
 
-                        <div class="border border-gray-300 border-dashed mt-4 rounded-md divide-y divide-gray-200 px-3 flex items-center justify-between text-sm animate__animated animate__fadeIn animate__faster" style="height: 47px;">
+                        <div
+                            :class="categories.length ? 'mt-4' : null"
+                            class="border border-gray-300 border-dashed rounded-md divide-y divide-gray-200 px-3 flex items-center justify-between text-sm animate__animated animate__fadeIn animate__faster"
+                            style="height: 47px;"
+                        >
                             <div class="w-0 flex-1 flex items-center">
                                 <svg class="flex-shrink-0 h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"></path></svg>
                                 <input
