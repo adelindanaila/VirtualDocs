@@ -2,19 +2,28 @@
     <div id="documents_content" class="flex flex-wrap overflow-hidden">
 		<Categories :category="category" />
 		<div class="w-3/4 overflow-hidden pl-3 flex flex-col justify-between">
-			<div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+			<div class="sm:-mx-6 lg:-mx-8">
 				<div class="align-middle inline-block min-w-full sm:px-6 lg:px-8">
 					<div class="border border-gray-100 overflow-hidden sm:rounded-lg">
 						<table class="min-w-full divide-y divide-gray-200">
 							<thead class="bg-gray-50">
 								<tr>
-									<th scope="col" class="px-6 h-16 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">
+									<th
+										:style="admin ? 'width: 50%;' : 'width: 75%;'"
+										scope="col"
+										class="px-6 h-16 text-left text-sm font-medium text-gray-500 uppercase tracking-wider"
+									>
 										Document
 									</th>
-									<th scope="col" class="px-6 h-16 text-left text-sm font-medium text-gray-500 uppercase tracking-wider text-center">
+									<th
+										style="width: 25%"
+										scope="col"
+										class="px-6 h-16 text-left text-sm font-medium text-gray-500 uppercase tracking-wider text-center"
+									>
 										Date
 									</th>
 									<th v-if="admin"
+										style="width: 25%"
 										scope="col"
 										class="relative px-6 h-16"
 									>
@@ -41,7 +50,7 @@
 													{{ document.name }}
 												</div>
 												<div class="text-sm text-gray-500">
-													{{ document.description }}
+													{{ document.description.length > (this.admin ? 50 : 95) ? document.description.substring(0, (this.admin ? 50 : 95)) + '..' : document.description }}
 												</div>
 											</div>
 										</div>

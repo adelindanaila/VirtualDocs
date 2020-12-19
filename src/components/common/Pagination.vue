@@ -75,6 +75,8 @@ export default {
 
         renderFirstShowing( ) {
 
+            if( !this.data.totalDocs ) return 0
+
             let amount = (this.data.page - 1) * this.data.limit
             if( !amount ) amount = 1
 
@@ -83,6 +85,8 @@ export default {
         },
 
         renderSecondShowing( ) {
+
+            if( !this.data.totalDocs ) return 0
 
             let amount = this.data.limit * this.data.page
             if( amount > this.data.totalDocs ) amount = this.data.totalDocs
