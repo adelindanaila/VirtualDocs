@@ -8,7 +8,11 @@
             </h2>
             <div class="mt-8 lex lg:mt-0 lg:flex-shrink-0">
                 <div class="ml-3 inline-flex rounded-md shadow">
-                    <a href="#" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-indigo-50">
+                    <a
+                        @click="print( )"
+                        href="javascript:void(0);"
+                        class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-indigo-50"
+                    >
                     Print
                     </a>
                 </div>
@@ -25,12 +29,12 @@
             </div>
         </div>
     </div>
-
 </template>
 
 <script>
 import Hero from '@/components/common/Hero'
 import axios from 'axios'
+import printJS from 'print-js'
 
 import 'pdfjs-dist/web/pdf_viewer.css'
 import * as pdfjsLib from 'pdfjs-dist/build/pdf.js'
@@ -117,6 +121,44 @@ export default {
     unmounted( ) {
 
         document.getElementById('app').classList.remove('bg-gray-200', 'bg-opacity-75')
+
+    },
+
+    methods: {
+
+        async print( ) {
+
+            let fields = { }
+            const inputs = document.querySelectorAll('.annotationLayer input')
+
+            inputs.forEach(( node ) => {
+
+                fields[node.name] = node.value
+
+            })
+            
+            const response = await axios.post('/document/fill', {
+
+                file: this.document.file,
+                fields: JSON.stringify(fields)
+
+            }, {
+
+                responseType: 'arraybuffer'
+
+            })
+
+            const blob = new Blob([ response.data ], {
+
+                type: 'application/pdf'
+
+            })
+
+            let url = URL.createObjectURL(blob)
+            printJS( url )
+            url = URL.revokeObjectURL(blob)
+
+        }
 
     }
     

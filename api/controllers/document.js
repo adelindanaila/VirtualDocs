@@ -1,5 +1,9 @@
 const model = require('../models/document')
+const pdftk = require('node-pdftk')
+const path = require('path')
 const fs = require('fs')
+
+require('dotenv').config({ path: '../../.env' })
 
 module.exports.document = async ( request, response ) => {
 
@@ -58,6 +62,25 @@ module.exports.add = async ( request, response ) => {
         })
 
         response.status(200).json( data )
+
+    }
+
+    catch (error) {
+        
+        response.status(400).json( error )
+
+    }
+
+}
+
+module.exports.fill = async ( request, response ) => {
+
+    const { file, fields } = request.body
+    
+    try {
+
+        const data = await pdftk.input(path.join(__dirname, `../../${process.env.UPLOAD_FOLDER}/${file}.pdf`)).fillForm(JSON.parse(fields)).flatten( ).output( )
+        response.status(200).send( data )
 
     }
 
