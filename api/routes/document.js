@@ -27,8 +27,10 @@ const upload = multer({
 })
 
 router.get('/document', controller.document)
-router.get('/documents', controller.documents)
 router.post('/document/add', [admin_authorization, upload.single('file')], controller.add)
 router.post('/document/fill', controller.fill)
+
+router.get('/documents', controller.documents)
+router.get('/documents/search', controller.search_documents)
 
 module.exports = router

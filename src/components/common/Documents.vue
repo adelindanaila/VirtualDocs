@@ -37,7 +37,7 @@
 									:key="document._id"
 									@click="this.$router.push(`/document/${encodeURI(document.name.replace(/\s+/g, '-').toLowerCase())}/${document._id}`)"
 									:class="!this.admin ? 'cursor-pointer hover:text-indigo-400 hover:bg-indigo-100' : null"
-									class="animate__animated animate__fadeIn animate__faster"
+									class="animate__animated animate__fadeIn animate__faster transition"
 								>
 									<td class="px-6 py-4 whitespace-nowrap">
 										<div class="flex items-center">

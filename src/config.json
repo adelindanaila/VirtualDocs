@@ -6,5 +6,6 @@
     "not_unauthorized_page": "/404",
     "document_max_size": "10",
     "document_max_files": "100",
-    "document_viewport_scale": "1.25"
+    "document_viewport_scale": "1.25",
+    "search_limit": "5"
 }

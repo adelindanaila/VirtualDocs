@@ -24,25 +24,6 @@ module.exports.document = async ( request, response ) => {
 
 }
 
-module.exports.documents = async ( request, response ) => {
-
-    const { category, limit, page } = request.query
-    
-    try {
-        
-        const data = await model.documents( category, Number(limit), Number(page) )
-        response.status(200).json( data )
-
-    }
-
-    catch (error) {
-        
-        response.status(400).json( error )
-
-    }
-
-}
-
 module.exports.add = async ( request, response ) => {
 
     const { file } = request
@@ -81,6 +62,55 @@ module.exports.fill = async ( request, response ) => {
 
         const data = await pdftk.input(path.join(__dirname, `../../${process.env.UPLOAD_FOLDER}/${file}.pdf`)).fillForm(JSON.parse(fields)).flatten( ).output( )
         response.status(200).send( data )
+
+    }
+
+    catch (error) {
+        
+        response.status(400).json( error )
+
+    }
+
+}
+
+module.exports.documents = async ( request, response ) => {
+
+    const { category, limit, page } = request.query
+    
+    try {
+        
+        const data = await model.documents( category, Number(limit), Number(page) )
+        response.status(200).json( data )
+
+    }
+
+    catch (error) {
+        
+        response.status(400).json( error )
+
+    }
+
+}
+
+module.exports.search_documents = async ( request, response ) => {
+
+    const { name, limit } = request.query
+    
+    try {
+
+        let data = [ ]
+
+        if( name.length ) {
+
+            data = await model.find({
+            
+                name: new RegExp( name, 'i' )
+            
+            }).limit( Number(limit) )
+
+        }
+
+        response.status(200).json( data )
 
     }
 
