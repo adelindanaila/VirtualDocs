@@ -20,7 +20,6 @@ import Hero from '@/components/common/Hero'
 import Sidebar from '@/components/admin/Sidebar'
 
 export default {
-	name: 'Users',
 	components: {
         Hero,
         Sidebar

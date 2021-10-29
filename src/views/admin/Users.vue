@@ -89,7 +89,6 @@ import axios from 'axios'
 
 export default {
 
-	name: 'Users',
 	components: {
 
 		Hero,

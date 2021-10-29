@@ -257,7 +257,6 @@ import SignUpModal from '@/components/user/signup/Modal'
 
 export default {
 
-    name: 'Navbar',
 	components: {
         SignInModal,
         SignUpModal

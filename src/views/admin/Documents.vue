@@ -23,7 +23,6 @@ import DocumentsComponent from '@/components/common/Documents'
 
 export default {
 
-	name: 'Documents',
 	components: {
 
         Hero,

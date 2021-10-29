@@ -3,9 +3,9 @@
 	<div class="py-12 bg-white">
 		<div class="max-w-7xl mx-auto">
 			<div class="lg:text-center">
-				<h2 class="text-base text-indigo-600 font-semibold tracking-wide uppercase">Transactions</h2>
+				<h2 class="text-base text-indigo-600 font-semibold tracking-wide uppercase">VirtualDocs</h2>
 				<p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-					A better way to send money
+					Lorem ipsum heading
 				</p>
 				<p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
 					Lorem ipsum dolor sit amet consect adipisicing elit. Possimus magnam voluptatum cupiditate veritatis in accusamus quisquam.
@@ -24,7 +24,7 @@
 						</div>
 						<div class="ml-4">
 							<dt class="text-lg leading-6 font-medium text-gray-900">
-								Competitive exchange rates
+								Lorem ipsum heading
 							</dt>
 							<dd class="mt-2 text-base text-gray-500">
 								Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.
@@ -42,7 +42,7 @@
 						</div>
 						<div class="ml-4">
 							<dt class="text-lg leading-6 font-medium text-gray-900">
-								No hidden fees
+								Lorem ipsum heading
 							</dt>
 							<dd class="mt-2 text-base text-gray-500">
 								Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.
@@ -60,7 +60,7 @@
 						</div>
 						<div class="ml-4">
 							<dt class="text-lg leading-6 font-medium text-gray-900">
-								Transfers are instant
+								Lorem ipsum heading
 							</dt>
 							<dd class="mt-2 text-base text-gray-500">
 								Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.
@@ -78,7 +78,7 @@
 						</div>
 						<div class="ml-4">
 							<dt class="text-lg leading-6 font-medium text-gray-900">
-								Mobile notifications
+								Lorem ipsum heading
 							</dt>
 							<dd class="mt-2 text-base text-gray-500">
 								Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.
@@ -95,7 +95,6 @@
 import Hero from '@/components/home/Hero'
 
 export default {
-	name: 'Home',
 	components: {
 		Hero
 	}

@@ -1,24 +1,10 @@
-# virtualdocs
 
-## Project setup
-```
-yarn install
-```
-
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## About  
+Fill and print PDF forms with PDF.js
+  
+*This is a side project, the purpose of this web app is to learn and develop Vue.js and PDF.js.*  
+![Presentation](https://i.imgur.com/kSwPWgJ.jpeg)
+  
+## Setup  
+  
+You need a MongoDB instance and install PDFTK Server on your machine, then fill the .env file.

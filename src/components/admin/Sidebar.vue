@@ -73,7 +73,6 @@ import Categories from '@/components/admin/Categories'
 
 export default {
     
-    name: 'Navbar',
 	components: {
 
         AddDocuments,

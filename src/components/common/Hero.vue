@@ -10,7 +10,6 @@
 import Search from '@/components/common/Search'
 
 export default {
-	name: 'Hero',
 	components: {
 		Search
 	}

@@ -45,7 +45,6 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker
 
 export default {
     
-    name: 'Document',
 	components: {
 
 		Hero
