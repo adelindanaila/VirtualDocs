@@ -3,7 +3,7 @@ const user_authorization = require('../authorizations/user')
 const admin_authorization = require('../authorizations/admin')
 const controller = require('../controllers/user')
 
-const router = Router( )
+const router = Router()
 
 router.post('/user/signup', controller.signup)
 router.post('/user/signin', controller.signin)

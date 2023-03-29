@@ -14,69 +14,47 @@ import 'animate.css'
 // axios settings
 axios.defaults.baseURL = config.api_url
 axios.interceptors.request.use(
+  config => {
+    config.headers.authorization = `Bearer ${store.state.token}`
+    return config
+  },
 
-    config => {
-        
-        config.headers.authorization = `Bearer ${store.state.token}`
-        return config
-
-    },
-
-    error => {
-
-        return Promise.reject(error)
-
-    }
-
+  error => {
+    return Promise.reject(error)
+  }
 )
 
 // jwt check
-router.beforeEach( async ( to, from, next ) => {
+router.beforeEach(async (to, from, next) => {
+  if (!store.state.token && to.meta.authenticated) {
+    store.dispatch('loading', false)
+    router.push(config.not_logged_page)
 
-	if( !store.state.token && to.meta.authenticated ) {
-		
-		store.dispatch('loading', false)
-		router.push(config.not_logged_page)
+    return next()
+  } else if (store.state.token) {
+    // admin check
+    let admin = jwt.decode(store.state.token).admin ? true : false
+    store.dispatch('admin', admin)
 
-		return next( )
+    if (to.meta.admin && !admin) {
+      store.dispatch('loading', false)
+      router.push(config.not_unauthorized_page)
 
-	}
-	
-	else if( store.state.token ) {
+      return next()
+    }
 
-		// admin check
-		let admin = jwt.decode(store.state.token).admin ? true : false
-		store.dispatch('admin', admin)
+    try {
+      const response = await axios.get('/user')
 
-		if( to.meta.admin && !admin ) {
-			
-			store.dispatch('loading', false)
-			router.push(config.not_unauthorized_page)
+      store.dispatch('user', response.data)
+    } catch {
+      if (to.meta.authenticated) router.push(config.not_logged_page)
+    }
+  }
 
-			return next( )
+  store.dispatch('loading', false)
 
-		}
-
-		try {
-
-			const response = await axios.get('/user')
-			
-			store.dispatch('user', response.data)
-
-		}
-		
-		catch {
-		
-			if( to.meta.authenticated ) router.push(config.not_logged_page)
-		
-		}
-
-	}
-
-	store.dispatch('loading', false)
-
-	return next( )
-
+  return next()
 })
 
 const app = createApp(App)

@@ -1,98 +1,64 @@
 import { createStore } from 'vuex'
 
 export default createStore({
+  state: {
+    loading: true,
+    token: localStorage.getItem('token'),
+    user: null,
+    admin: false,
+  },
 
-	state: {
+  getters: {
+    loading: state => {
+      return state.loading
+    },
 
-		loading: true,
-		token: localStorage.getItem('token'),
-		user: null,
-		admin: false
+    token: state => {
+      return state.token
+    },
 
-	},
+    user: state => {
+      return state.user
+    },
 
-	getters: {
+    admin: state => {
+      return state.admin
+    },
+  },
 
-		loading: ( state ) => {
+  mutations: {
+    loading(state, loading) {
+      state.loading = loading
+    },
 
-			return state.loading
+    token(state, token) {
+      state.token = token
+    },
 
-		},
+    user(state, user) {
+      state.user = user
+    },
 
-		token: ( state ) => {
+    admin(state, admin) {
+      state.admin = admin
+    },
+  },
 
-			return state.token
+  actions: {
+    loading(context, loading) {
+      context.commit('loading', loading)
+    },
 
-		},
+    token(context, token) {
+      context.commit('token', token)
+    },
 
-		user: ( state ) => {
+    user(context, user) {
+      context.commit('user', user)
+    },
 
-			return state.user
-
-		},
-
-		admin: ( state ) => {
-
-			return state.admin
-
-		}
-
-	},
-
-	mutations: {
-
-		loading( state, loading ) {
-
-			state.loading = loading
-
-		},
-
-		token( state, token ) {
-
-			state.token = token
-
-		},
-
-		user( state, user ) {
-
-			state.user = user
-
-		},
-
-		admin( state, admin ) {
-
-			state.admin = admin
-
-		}
-
-	},
-
-	actions: {
-
-		loading( context, loading ) {
-
-			context.commit('loading', loading)
-
-		},
-
-		token( context, token ) {
-
-			context.commit('token', token)
-
-		},
-
-		user( context, user ) {
-
-			context.commit('user', user)
-
-		},
-
-		admin( context, admin ) {
-
-			context.commit('admin', admin)
-
-		}
-
-	}
-
+    admin(context, admin) {
+      context.commit('admin', admin)
+    },
+  },
 })

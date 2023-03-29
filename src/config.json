@@ -1,11 +1,11 @@
 {
-    "mode": "development",
-    "api_url": "http://localhost:4000",
-    "upload_folder": "documents",
-    "not_logged_page": "/404",
-    "not_unauthorized_page": "/404",
-    "document_max_size": "10",
-    "document_max_files": "100",
-    "document_viewport_scale": "1.25",
-    "search_limit": "5"
+  "mode": "development",
+  "api_url": "http://localhost:4000",
+  "upload_folder": "documents",
+  "not_logged_page": "/404",
+  "not_unauthorized_page": "/404",
+  "document_max_size": "10",
+  "document_max_files": "100",
+  "document_viewport_scale": "1.25",
+  "search_limit": "5"
 }
